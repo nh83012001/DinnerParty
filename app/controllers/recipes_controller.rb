@@ -4,7 +4,6 @@ class RecipesController < ApplicationController
   end
 
   def create
-    byebug
     @recipe = Recipe.new(recipe_params)
     if @recipe.save
       # @recipe.user_ids << params[:recipe][:owner_id]
