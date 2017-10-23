@@ -7,4 +7,4 @@
     <%end%>
   </ul>
 <h2> Create a new recipe </h2>
-<%= render 'create_recipe' %>
+<%= button_to("New Recipe", new_user_recipe_path(@user), method: :get) %>

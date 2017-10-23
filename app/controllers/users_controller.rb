@@ -22,6 +22,11 @@ class UsersController < ApplicationController
     end
   end
 
+  def newrecipe
+    @user = User.find(params[:id])
+    @recipe = Recipe.new
+  end
+
   private
 
   def user_params
