@@ -27,6 +27,11 @@ class UsersController < ApplicationController
     @recipe = Recipe.new
   end
 
+  def myprofile
+    @user = User.find_by_id(session[:current_user_id])
+    render :show
+  end
+
   private
 
   def user_params

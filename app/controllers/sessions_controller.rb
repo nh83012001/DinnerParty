@@ -1,17 +1,24 @@
 class SessionsController < ApplicationController
-  def new
+
+  def login
   end
 
   def create
-    user = User.find_by(name: params[:name][:username])
-    if user && user.authenticate(params[:session][:password])
+    @user = User.find_by(username: params[:sessions][:username])
 
+    if @user.authenticate(params[:sessions][:password])
+      session[:user_id] = @user.id
+      redirect_to user_path(@user)
     else
-      flash[:danger] = 'Invalid email/password combination'
-      render 'new'
+
+      render :login
     end
+
   end
 
   def destroy
+    session.delete :user_id
   end
+
+
 end
