@@ -8,9 +8,8 @@ class SessionsController < ApplicationController
 
     if @user.authenticate(params[:sessions][:password])
       session[:user_id] = @user.id
-      redirect_to user_path(@user)
+      redirect_to my_profile_path
     else
-
       render :login
     end
 

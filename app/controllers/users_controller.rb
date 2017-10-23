@@ -28,7 +28,7 @@ class UsersController < ApplicationController
   end
 
   def myprofile
-    @user = User.find_by_id(session[:current_user_id])
+    @user = User.find_by_id(session[:user_id])
     render :show
   end
 
