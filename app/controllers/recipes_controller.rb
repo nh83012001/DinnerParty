@@ -16,6 +16,10 @@ class RecipesController < ApplicationController
     @recipe = Recipe.find(params[:id])
   end
 
+  def index
+    @recipes = Recipe.all
+  end
+
   private
   def recipe_params
     params.require(:recipe).permit(:name, :ingredients, :instructions)
