@@ -10,7 +10,13 @@
     <p><%= @recipe.ingredients %></p>
     <label>Instructions</label>
     <p><%= @recipe.instructions %></p>
+    <label>Owner</label>
+    <p><%= @recipe.owner.name %></p>
+    <label>Users</label>
+    <% @recipe.users.each do |user| %>
+    <p><%= user.name %></p>
+    <% end %>
 
-    
+
   </body>
 </html>
