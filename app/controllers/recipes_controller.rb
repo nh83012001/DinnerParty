@@ -15,6 +15,12 @@ class RecipesController < ApplicationController
     end
   end
 
+  def fork
+    originrecipe = Recipe.find(params[:recipe_id])
+    @recipe =  originrecipe.dup
+
+  end
+
   def show
     @recipe = Recipe.find(params[:id])
   end
