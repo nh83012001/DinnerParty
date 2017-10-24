@@ -17,7 +17,8 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
-        redirect_to user_path(@user)
+      session[:user_id] = @user.id
+      redirect_to my_profile_path
     else
         render :new
     end
@@ -30,7 +31,7 @@ class UsersController < ApplicationController
 
   def myprofile
     @course = Course.new
-    @user = User.find_by_id(session[:user_id])
+    @user = User.find(session[:user_id])
     @created_dinners = Dinner.where(host_id: @user.id)
     @invited_dinners = @user.invites.where(accepted: nil)
     @accepted_dinners = @user.invites.where(accepted: true)
