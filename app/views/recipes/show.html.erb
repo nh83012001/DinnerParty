@@ -24,5 +24,8 @@
     <%if session[:user_id] != nil %>
       <p><%= button_to("Add Recipe to Your Recipes", user_path, method: :patch )%>
     <%end%>
+    <%if session[:user_id] == @recipe.owner_id%>
+      <p> THIS ONLY SHOWS IF YOU ARE THE OWNER</p>
+    <%end%>
   </body>
 </html>
