@@ -14,35 +14,39 @@
   <%end%>
 </ul>
 <h2> Dinners <h2>
-  <h4> My Dinners </h4>
-  <ul>
-    <%@created_dinners.each do |dinner|%>
-      <li>
-        <%=link_to dinner.name, dinner_path(dinner)%> - PUT Y/N HERE
-      </li>
-    <%end%>
-  </ul>
-  <h4>Pending Invites:</h4>
+  <% if @created_dinners %>
+    <h4> My Dinners </h4>
     <ul>
-      <%@invited_dinners.each do |invite| %>
+      <%@created_dinners.each do |dinner|%>
         <li>
-          <%=link_to invite.dinner.name, dinner_path(invite.dinner)%> - BUTTON FOR YES BUTTON FOR NOW
+          <%=link_to dinner.name, dinner_path(dinner)%> - PUT Y/N HERE
         </li>
       <%end%>
     </ul>
-  <h4>Accepted Dinners:</h4>
-  <ul>
-    <%@accepted_dinners.each do |accepted| %>
-      <li>
-        <%=link_to accepted.dinner.name, dinner_path(accepted.dinner)%>
-        <%=form_for @course do |f|%>
-          <%=f.hidden_field :dinner_id, :value=>accepted.dinner.id %>
-          <%=f.collection_select :userrecipe_id, @user.userrecipes, :id, :recipe_name%>
-          <%=f.select :course_type, Recipe.course_type%>
-          <%=f.submit 'Add Course'%>
+  <% elsif @invited_dinners %>
+    <h4>Pending Invites:</h4>
+      <ul>
+        <%@invited_dinners.each do |invite| %>
+          <li>
+            <%=link_to invite.dinner.name, dinner_path(invite.dinner)%> - BUTTON FOR YES BUTTON FOR NOW
+          </li>
         <%end%>
-      </li>
-    <%end%>
+      </ul>
+  <% elsif @accepted_dinners %>
+    <h4>Accepted Dinners:</h4>
+    <ul>
+      <%@accepted_dinners.each do |accepted| %>
+        <li>
+          <%=link_to accepted.dinner.name, dinner_path(accepted.dinner)%>
+          <%=form_for @course do |f|%>
+            <%=f.hidden_field :dinner_id, :value=>accepted.dinner.id %>
+            <%=f.collection_select :userrecipe_id, @user.userrecipes, :id, :recipe_name%>
+            <%=f.select :course_type, Recipe.course_type%>
+            <%=f.submit 'Add Course'%>
+          <%end%>
+        </li>
+      <%end%>
+  <% end %>
   </ul>
 
 <%= button_to("New Recipe", new_user_recipe_path(@user), method: :get) %>
