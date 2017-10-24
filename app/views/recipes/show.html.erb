@@ -21,11 +21,12 @@
       <p><%= link_to user.name, user_path(user) %></p>
     <%end%>
     <!--  May need to fix rout for clarity's sake!!-->
-    <%if session[:user_id] != nil %>
-      <p><%= button_to("Add Recipe to Your Recipes", user_path, method: :patch )%>
+    <%if session[:user_id] != nil && session[:user_id] != @recipe.owner_id%>
+      <p><%= button_to("Add Recipe to Your Recipes", recipe_path, method: :patch )%>
+      <%= button_to("Fork This Recipe to Make It Your Own!", recipe_fork_path(@recipe), method: :get )%></p>
     <%end%>
     <%if session[:user_id] == @recipe.owner_id%>
-      <p> THIS ONLY SHOWS IF YOU ARE THE OWNER</p>
+      <p><%= button_to("Edit This Recipe", edit_recipe_path, method: :get )%></p>
     <%end%>
   </body>
 </html>

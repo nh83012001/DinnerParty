@@ -4,12 +4,16 @@ Rails.application.routes.draw do
   delete '/logout',  to: 'sessions#destroy'
 
 
-  resources :recipes
+  resources :recipes do
+    get '/fork', to: 'recipes#fork', as: 'fork'
+  end
+
   resources :users
   resources :invites
   resources :dinners
   resources :courses
   get 'myprofile', to: 'users#myprofile', as: 'my_profile'
   get 'users/:id/new', to: 'users#newrecipe', as: 'new_user_recipe'
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
