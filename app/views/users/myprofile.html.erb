@@ -29,17 +29,20 @@
         </li>
       <%end%>
     </ul>
-  <% elsif @invited_dinners %>
+  <% end %>
+  <% if @invited_dinners %>
     <h4>Pending Invites:</h4>
       <ul>
         <%@invited_dinners.each do |invite| %>
           <li>
-            <%=link_to invite.dinner.name, dinner_path(invite.dinner)%> - BUTTON FOR YES BUTTON FOR NOW
-
+            <%=link_to invite.dinner.name, dinner_path(invite.dinner)%>
+            <%= button_to("Accept Invite", invite_accept_path(invite), method: :put) %>
+            <%= button_to("Reject Invite", invite_reject_path(invite), method: :put) %>
           </li>
         <%end%>
       </ul>
-  <% elsif @accepted_dinners %>
+  <% end %>
+  <% if @accepted_dinners %>
     <h4>Accepted Dinners:</h4>
     <ul>
       <%@accepted_dinners.each do |accepted| %>
