@@ -4,10 +4,8 @@
 <%= j.text_field :name %>
 <%= j.label :location %>
 <%= j.text_field :location %>
-<%= j.label :time %>
-<%= j.time_select :time, {:minute_step => 15, :ampm => true} %>
 <%= j.label :date %>
-<%= j.text_field :date, data:{ provide:'datepicker' } %>
+<%= j.datetime_field :date %>
 <%= j.label :attire %>
 <%= j.text_field :attire %>
 <br>
