@@ -43,13 +43,13 @@ class RecipesController < ApplicationController
     @user = User.find(session[:user_id])
     @recipe = Recipe.find(params[:id])
     if @recipe.owner_id == session[:user_id]
-      alterrecipebyowner
+      alter_recipe_by_owner
     else
-      addrecipetouser
+      add_recipe_to_user
     end
   end
 
-  def addrecipetouser
+  def add_recipe_to_user
     if @user.recipes.include?(@recipe)
       flash[:alert] = "Recipe already in your cookbook!"
       redirect_to recipe_path(params[:id])
@@ -61,7 +61,7 @@ class RecipesController < ApplicationController
     end
   end
 
-  def alterrecipebyowner
+  def alter_recipe_by_owner
     @recipe = Recipe.find(params[:id])
     @recipe.assign_attributes(recipe_params)
     if @recipe.save
