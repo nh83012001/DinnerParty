@@ -9,7 +9,10 @@ Rails.application.routes.draw do
   end
 
   resources :users
-  resources :invites
+  resources :invites do
+    put '/accept', to: 'invites#accept', as: 'accept'
+    put '/reject', to: 'invites#reject', as: 'reject'
+  end
   resources :dinners
   resources :courses
   get 'myprofile', to: 'users#myprofile', as: 'my_profile'
