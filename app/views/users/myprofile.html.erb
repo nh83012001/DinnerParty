@@ -1,6 +1,4 @@
-<% flash.each do |name, msg| -%>
-      <%= content_tag :div, msg, class: name %>
-<% end -%>
+
 <h1> Your Profile Page: <%=@user.name%></h1>
 
 <h3> Your Recipes </h3>
@@ -36,7 +34,13 @@
   <ul>
     <%@accepted_dinners.each do |accepted| %>
       <li>
-        <%=link_to accepted.dinner.name, dinner_path(invite.dinner)%>
+        <%=link_to accepted.dinner.name, dinner_path(accepted.dinner)%>
+        <%=form_for @course do |f|%>
+          <%=f.hidden_field :dinner_id, :value=>accepted.dinner.id %>
+          <%=f.collection_select :userrecipe_id, @user.userrecipes, :recipe_id, :recipe_name%>
+          <%=f.select :course_type, Recipe.course_type%>
+          <%=f.submit 'Add Course'%>
+        <%end%>
       </li>
     <%end%>
   </ul>

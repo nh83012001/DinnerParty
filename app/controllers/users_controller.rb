@@ -29,6 +29,7 @@ class UsersController < ApplicationController
   end
 
   def myprofile
+    @course = Course.new
     @user = User.find_by_id(session[:user_id])
     @created_dinners = Dinner.where(host_id: @user.id)
     @invited_dinners = @user.invites.where(accepted: nil)
