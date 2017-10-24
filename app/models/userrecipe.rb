@@ -7,4 +7,8 @@ class Userrecipe < ApplicationRecord
   def recipe_name
     self.recipe.name
   end
+
+  def user_name
+    self.user.name
+  end 
 end
