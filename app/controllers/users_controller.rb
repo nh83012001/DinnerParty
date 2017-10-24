@@ -30,7 +30,9 @@ class UsersController < ApplicationController
 
   def myprofile
     @user = User.find_by_id(session[:user_id])
-    render :myprofile
+    @created_dinners = Dinner.where(host_id: @user.id)
+    @invited_dinners = @user.invites.where(accepted: nil)
+    @accepted_dinners = @user.invites.where(accepted: true)
   end
 
   def edit

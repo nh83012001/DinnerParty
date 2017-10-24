@@ -18,7 +18,6 @@ class DinnersController < ApplicationController
     params[:dinner][:user_ids].each do |id|
       @dinner.users << User.find(id) unless id==""
     end
-
     redirect_to dinner_path(@dinner)
 
   end
@@ -26,7 +25,7 @@ class DinnersController < ApplicationController
   private
 
   def dinner_params
-    params.require(:dinner).permit(:location, :time, :host_id, :name, :attire, :user_ids=>[])
+    params.require(:dinner).permit(:location, :time, :host_id, :name, :attire)
   end
 
 end
