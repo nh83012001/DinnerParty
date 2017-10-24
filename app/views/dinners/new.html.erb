@@ -1,0 +1,17 @@
+<%= form_for @dinner do |j| %>
+<%= j.hidden_field :host_id, :value=> session[:user_id] %>
+<%= j.label :name %>
+<%= j.text_field :name %>
+<%= j.label :location %>
+<%= j.text_field :location %>
+<%= j.label :time %>
+<%= j.text_field :time %>
+<%= j.label :attire %>
+<%= j.text_field :attire %>
+<br>
+<%= j.collection_check_boxes :user_ids, User.all, :id, :name %>
+<br>
+
+<br>
+<%=j.submit %>
+<% end %>
