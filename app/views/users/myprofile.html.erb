@@ -1,6 +1,4 @@
-<% flash.each do |name, msg| -%>
-      <%= content_tag :div, msg, class: name %>
-<% end -%>
+
 <h1> Your Profile Page: <%=@user.name%></h1>
 
 <h3> Your Recipes </h3>
@@ -15,7 +13,38 @@
     <li><%=link_to recipe.name, recipe_path(recipe)%></li>
   <%end%>
 </ul>
-<h3> Dinners <h3>
+<h2> Dinners <h2>
+  <h4> My Dinners </h4>
+  <ul>
+    <%@created_dinners.each do |dinner|%>
+      <li>
+        <%=link_to dinner.name, dinner_path(dinner)%> - PUT Y/N HERE
+      </li>
+    <%end%>
+  </ul>
+  <h4>Pending Invites:</h4>
+    <ul>
+      <%@invited_dinners.each do |invite| %>
+        <li>
+          <%=link_to invite.dinner.name, dinner_path(invite.dinner)%> - BUTTON FOR YES BUTTON FOR NOW
+        </li>
+      <%end%>
+    </ul>
+  <h4>Accepted Dinners:</h4>
+  <ul>
+    <%@accepted_dinners.each do |accepted| %>
+      <li>
+        <%=link_to accepted.dinner.name, dinner_path(accepted.dinner)%>
+        <%=form_for @course do |f|%>
+          <%=f.hidden_field :dinner_id, :value=>accepted.dinner.id %>
+          <%=f.collection_select :userrecipe_id, @user.userrecipes, :recipe_id, :recipe_name%>
+          <%=f.select :course_type, Recipe.course_type%>
+          <%=f.submit 'Add Course'%>
+        <%end%>
+      </li>
+    <%end%>
+  </ul>
 
 <%= button_to("New Recipe", new_user_recipe_path(@user), method: :get) %>
 <%= button_to("Logout", logout_path, method: :delete)%>
+<%= button_to('Create a Dinner Plan', new_dinner_path, method: :get)%>

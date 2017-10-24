@@ -4,10 +4,15 @@ class Recipe < ApplicationRecord
   has_many :users, through: :userrecipes
   belongs_to :owner, class_name: "User"
 
+
+
   def self.search(search)
     where("name LIKE ?", "%#{search}%")
     where("ingredients LIKE ?", "%#{search}%")
     where("instructions LIKE ?", "%#{search}%")
+  end
 
+  def self.course_type
+    ['appetizer', 'main course', 'desert', 'alchohol']
   end
 end
