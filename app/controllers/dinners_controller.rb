@@ -8,7 +8,7 @@ class DinnersController < ApplicationController
   end
 
   def new
-
+    @owner = User.find(session[:user_id])
     @dinner = Dinner.new
     @dinner.invites.build
   end
