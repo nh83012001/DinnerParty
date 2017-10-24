@@ -1,0 +1,16 @@
+<%= form_for @recipe do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name, value: @recipe.name %>
+  <br><br>
+  <%= f.label :ingredients %>
+  <br>
+  <%= f.text_area(:ingredients, size: "50x8", value: @recipe.ingredients) %>
+  <br><br>
+  <%= f.label :instructions %>
+  <br>
+  <%= f.text_area(:instructions, size: "50x8", value: @recipe.instructions) %>
+  <br><br>
+  <%= f.hidden_field :owner_id, value: @recipe.owner_id %>
+  <%= f.submit %>
+
+<% end %>

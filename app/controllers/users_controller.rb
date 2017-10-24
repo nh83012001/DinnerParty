@@ -35,20 +35,6 @@ class UsersController < ApplicationController
   def edit
   end
 
-  def update
-      # should add to its own method at a later date
-    @user = User.find(session[:user_id])
-    @recipe = Recipe.find(params[:id])
-    if @user.recipes.include?(@recipe)
-      flash[:alert] = "Recipe already in your cookbook!"
-      redirect_to recipe_path(params[:id])
-    else
-      @user.recipes << @recipe
-      @user.save
-      flash.now[:notice] = "Recipe Succesfully Added!"
-      render :myprofile
-    end
-  end
 
   private
 
