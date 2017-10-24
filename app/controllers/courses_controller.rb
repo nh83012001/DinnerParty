@@ -10,6 +10,13 @@ class CoursesController < ApplicationController
     end
   end
 
+  def destroy
+    @course = Course.find(params[:id])
+    @dinner = Dinner.find(@course.dinner_id)
+    @course.destroy
+    redirect_to dinner_path(@dinner)
+  end
+
   private
 
   def course_params

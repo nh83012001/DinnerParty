@@ -1,16 +1,38 @@
 <h1><%= @dinner.name %></h1>
 <p><%= @dinner.date.strftime("%A")%>, <%= @dinner.date.strftime("%B")%> <%= @dinner.date.strftime("%d")%> <%= @dinner.date.strftime("%Y")%></p>
 
-<p><%= @dinner.location%></p>
-<p><%= @dinner.attire%></p>
-<br>
+<p>Location: <%= @dinner.location%></p>
+<p>Attire: <%= @dinner.attire%></p>
+<p>Host: <%= @dinner.host.name%></p>
 
-Courses: <%= @dinner.courses.count %>
+<h3>Courses: <%= @dinner.courses.count %></h3>
 <br>
-Invites: <%= @dinner.invites.count %>
-<br>
-Declined: <%= @dinner.invites.where(accepted: false).count %>
-<br>
-Pending: <%= @dinner.invites.where(accepted: nil).count %>
-<br>
-Attending: <%= @dinner.invites.where(accepted: true).count %>
+<ul>
+<%@dinner.courses.each do |course| %>
+  <li>
+    <%=course.userrecipe.user_name%> is bringing <%=link_to course.recipe_name, recipe_path(course.recipe)%> which is a <%=course.course_type%> course!
+    <%if course.user.id == session[:user_id]%>
+      <%=button_to 'Delete your course!', "/courses/#{course.id}", method: :delete, class: "delete_button"%>
+    <%end%>
+  </li>
+<%end%>
+</ul>
+<h3>Invites: <%= @dinner.invites.count %></h3>
+Declined: <%= @dinner.declined_invitations.count %>
+<ul>
+  <%@dinner.declined_invitations.each do |invite|%>
+    <li><%=invite.user.name%></li>
+  <%end%>
+</ul>
+Pending: <%= @dinner.pending_invitations.count %>
+  <ul>
+  <%@dinner.pending_invitations.each do |invite|%>
+    <li><%=invite.user.name%></li>
+  <%end%>
+  </ul>
+Attending: <%= @dinner.accepted_invitations.count %>
+  <ul>
+  <%@dinner.accepted_invitations.each do |invite|%>
+    <li><%=invite.user.name%></li>
+  <%end%>
+  </ul>
