@@ -1,5 +1,6 @@
 <h1><%= @dinner.name %></h1>
-<p><%= @dinner.date%></p>
+<p><%= @dinner.date.strftime("%A")%>, <%= @dinner.date.strftime("%B")%> <%= @dinner.date.strftime("%d")%> <%= @dinner.date.strftime("%Y")%></p>
+
 <p><%= @dinner.location%></p>
 <p><%= @dinner.attire%></p>
 <br>

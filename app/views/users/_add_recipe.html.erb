@@ -1,0 +1,6 @@
+<%=form_for @course do |f|%>
+  <%=f.hidden_field :dinner_id, :value=>accepted.dinner.id %>
+  <%=f.collection_select :userrecipe_id, @user.userrecipes, :id, :recipe_name%>
+  <%=f.select :course_type, Recipe.course_type%>
+  <%=f.submit 'Add Course'%>
+<%end%>
