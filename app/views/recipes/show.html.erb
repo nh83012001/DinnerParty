@@ -4,19 +4,25 @@
     <meta charset="utf-8">
     <title></title>
   </head>
+
   <body>
+    <% flash.each do |name, msg| -%>
+          <%= content_tag :div, msg, class: name %>
+    <%end-%>
     <h1><%= @recipe.name %></h1>
     <label>Ingredients</label>
     <p><%= @recipe.ingredients %></p>
     <label>Instructions</label>
     <p><%= @recipe.instructions %></p>
     <label>Owner</label>
-    <p><%= @recipe.owner.name %></p>
+    <p><%= link_to @recipe.owner.name, user_path(@recipe.owner) %></p>
     <label>Users</label>
     <% @recipe.users.each do |user| %>
-    <p><%= user.name %></p>
-    <% end %>
-
-
+      <p><%= link_to user.name, user_path(user) %></p>
+    <%end%>
+    <!--  May need to fix rout for clarity's sake!!-->
+    <%if session[:user_id] != nil %>
+      <p><%= button_to("Add Recipe to Your Recipes", user_path, method: :patch )%>
+    <%end%>
   </body>
 </html>

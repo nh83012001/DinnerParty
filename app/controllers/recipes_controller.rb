@@ -8,7 +8,7 @@ class RecipesController < ApplicationController
     if @recipe.save
       # @recipe.user_ids << params[:recipe][:owner_id]
       @recipe.users << @recipe.owner
-      redirect_to recipe_path(@recipe)
+      redirect_to my_profile_path
     else
       render :new
     end

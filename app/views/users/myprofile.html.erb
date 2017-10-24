@@ -1,1 +1,20 @@
-TEST
+<% flash.each do |name, msg| -%>
+      <%= content_tag :div, msg, class: name %>
+<% end -%>
+<h1> Your Profile Page: <%=@user.name%></h1>
+
+<h3> Your Recipes </h3>
+<ul>
+  <%@user.owned_recipes.each do |recipe|%>
+    <li><%=link_to recipe.name, recipe_path(recipe)%></li>
+  <%end%>
+</ul>
+<h3> Recipes </h3>
+<ul>
+  <%@user.recipes.each do |recipe|%>
+    <li><%=link_to recipe.name, recipe_path(recipe)%></li>
+  <%end%>
+</ul>
+<h3> Dinners <h3>
+
+<%= button_to("New Recipe", new_user_recipe_path(@user), method: :get) %>
