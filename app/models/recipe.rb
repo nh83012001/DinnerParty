@@ -7,9 +7,7 @@ class Recipe < ApplicationRecord
 
 
   def self.search(search)
-    where("name LIKE ?", "%#{search}%")
-    where("ingredients LIKE ?", "%#{search}%")
-    where("instructions LIKE ?", "%#{search}%")
+    where("name LIKE ? or ingredients LIKE ? or instructions LIKE ?", "%#{search}%", "%#{search}%", "%#{search}%")
   end
 
   def self.course_type
