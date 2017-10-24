@@ -1,4 +1,4 @@
 class Course < ApplicationRecord
-  belongs_to :recipes
-  belongs_to :dinners
+  belongs_to :userrecipe
+  belongs_to :dinner
 end
