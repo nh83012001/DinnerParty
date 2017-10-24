@@ -6,7 +6,7 @@ class CoursesController < ApplicationController
       redirect_to dinner_path(params[:course][:dinner_id])
     else
       flash.now[:error] = 'There was an error in adding your recipe!'
-      redirect_to my my_profile_path
+      redirect_to my_profile_path
     end
   end
 

@@ -1,12 +1,15 @@
 <h1><%= @dinner.name %></h1>
-<p><%= @dinner.time%></p>
+<p><%= @dinner.date%></p>
 <p><%= @dinner.location%></p>
 <p><%= @dinner.attire%></p>
 <br>
 
-<%= @dinner.courses.count %>
+Courses: <%= @dinner.courses.count %>
 <br>
-<%= @dinner.invites.count %>
-<%= @dinner.invites.count.where(attending: false) %>
-<%= @dinner.invites.count.where(attending: nil) %>
-<%= @dinner.invites.count.where(attending: true) %>
+Invites: <%= @dinner.invites.count %>
+<br>
+Declined: <%= @dinner.invites.where(accepted: false).count %>
+<br>
+Pending: <%= @dinner.invites.where(accepted: nil).count %>
+<br>
+Attending: <%= @dinner.invites.where(accepted: true).count %>
