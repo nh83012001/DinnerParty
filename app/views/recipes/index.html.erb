@@ -1,4 +1,8 @@
 <h1> All Recipes </h1>
+  <%= form_tag(recipes_path, :method => "get", id: "search-form") do %>
+  <%= text_field_tag :search, params[:search], placeholder: "Search Recipes" %>
+  <%= submit_tag "Search" %>
+  <% end %>
 <body>
   <%@recipes.each do |recipe| %>
   <p> <%= link_to recipe.name, recipe_path(recipe)%> </p>

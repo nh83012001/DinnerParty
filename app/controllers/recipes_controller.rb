@@ -27,6 +27,12 @@ class RecipesController < ApplicationController
 
   def index
     @recipes = Recipe.all
+
+    if params[:search]
+      @recipes = Recipe.search(params[:search])
+    else
+      @recipes = Recipe.all
+    end
   end
 
   def edit
