@@ -13,13 +13,20 @@ Dinner.destroy_all
 Invite.destroy_all
 Course.destroy_all
 
-session[:user_id] = nil
+
+##create users
 
 becky = User.create(name: "Becky Newborn", username: "beckynewborn", password: "becky123")
 nick = User.create(name: "Nick Hall", username: "nickhall", password: "nick123")
 josh = User.create(name: "Josh Denenberg", username: "joshdenenberg", password: "josh123")
 tim = User.create(name: "Tim Campbell", username: "timcampbell", password: "tim123")
 es = User.create(name: "Es Corniel", username: "escorniel", password: "esmery123")
+jason = User.create(name: "Jason Decker", username: "jasondecker", password: "jason123")
+avi = User.create(name: "Avi Flombaum", username: "aviflombaum", password: "avi123")
+adam = User.create(name: "Adam Enbar", username: "adamenbar", password: "adam123")
+miguel = User.create(name: "Miguel McKevey", username: "miguelmckevey", password: "miguel123")
+
+##create recipes
 
 toast = Recipe.new(name: "Toast", ingredients: "Bread, Butter, Jam", instructions: "toast bread in toaster. Spread with butter or jam.")
 toast.owner = becky
@@ -41,6 +48,20 @@ chicken_parmesean = Recipe.new(name: "Chicken Parmesean", ingredients: "Chicken 
 chicken_parmesean.owner = becky
 chicken_parmesean.users << becky
 chicken_parmesean.save
+hamburger = Recipe.new(name: "Hamburger", ingredients: "Hamburger bun, ground beef, seasoning", instructions: "make burger patty. Grill until cooked to personal liking. Serve on bun with ketchup, lettuce, tomato.")
+hamburger.owner = jason
+hamburger.users << jason
+hamburger.save
+lasagna = Recipe.new(name: "Lasagna", ingredients: "Lasagna sheets, tomato sauce, ground beef, ricotta cheese, shredded mozzarella.", instructions: "Layer lasagna sheets, sauce, meat, and ricotta until top of the pan. Top with mozzarella. Bake covered for 30 minutes, uncovered for 30 minutes.")
+lasagna.owner = avi
+lasagna.users << avi
+lasagna.save
+wings = Recipe.new(name: "Buffalo Wings", ingredients: "assorted chicken wings, hot sauce, butter.", instructions: "deep fry wings. coat in hot sauce and butter mixture. Serve hot with blue cheese dressing and celery sticks.")
+wings.owner = miguel
+wings.users << miguel
+wings.save
+
+##create userrecipe relationships
 
 pasta.users << becky
 salad.users << becky
@@ -52,3 +73,11 @@ salad.users << tim
 toast.users << tim
 salad.users << es
 toast.users << es
+wings.users << jason
+lasagna.users << jason
+salad.users << avi
+toast.users << avi
+lasagna.users << adam
+wings.users << adam
+chicken_parmesean.users << miguel
+pasta.users << miguel
