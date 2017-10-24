@@ -7,3 +7,6 @@
 <%= @dinner.courses.count %>
 <br>
 <%= @dinner.invites.count %>
+<%= @dinner.invites.count.where(attending: false) %>
+<%= @dinner.invites.count.where(attending: nil) %>
+<%= @dinner.invites.count.where(attending: true) %>
