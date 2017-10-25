@@ -23,15 +23,15 @@
           <% if dinner.upcoming? %>
           <%=form_for @course do |f|%>
             <%=f.hidden_field :dinner_id, :value=>dinner.id %>
-            <%=f.collection_select :userrecipe_id, @user.userrecipes, :id, :recipe_name%>
-            <%=f.select :course_type, Recipe.course_type%>
+            <%=f.collection_select :userrecipe_id, @user.userrecipes, :id, :recipe_name, :class =>"browser-default"%>
+            <%=f.select :course_type, Recipe.course_type, :class =>"browser-default"%>
             <%=f.submit 'Add Course'%>
           <%end%>
           <%=form_for @drink do |f|%>
             <%=f.hidden_field :dinner_id, :value=>dinner.id %>
             <%=f.hidden_field :user_id, :value=>@user.id%>
-            <%=f.select :drink_type, Drink.drink_designations%>
-            <%=f.select :quantity, 1..10%>
+            <%=f.select :drink_type, Drink.drink_designations, :class =>"browser-default"%>
+            <%=f.select :quantity, 1..10, :class =>"browser-default"%>
             <%=f.submit 'Add Drink'%>
           <%end%>
 
