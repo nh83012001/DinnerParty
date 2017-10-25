@@ -49,29 +49,46 @@
         <%end%>
       </ul>
   <% end %>
+
   <% if @accepted_dinners %>
-    <h4>Accepted Dinners:</h4>
-    <ul>
-      <%@accepted_dinners.each do |accepted| %>
-        <li>
+   <h4>Accepted Dinners:</h4>
+   <h5>  Upcoming Dinners:</h5>
+   <ul>
+     <%@accepted_dinners.each do |accepted| %>
+     <% if accepted.dinner.date > Time.now%>
+       <li>
+
           <%=link_to accepted.dinner.name, dinner_path(accepted.dinner)%>
-          <%=form_for @course do |f|%>
-            <%=f.hidden_field :dinner_id, :value=>accepted.dinner.id %>
-            <%=f.collection_select :userrecipe_id, @user.userrecipes, :id, :recipe_name%>
-            <%=f.select :course_type, Recipe.course_type%>
-            <%=f.submit 'Add Course'%>
-          <%end%>
-          <%=form_for @drink do |f|%>
-            <%=f.hidden_field :dinner_id, :value=>accepted.dinner.id %>
-            <%=f.hidden_field :user_id, :value=>@user.id%>
-            <%=f.select :drink_type, Drink.drink_designations%>
-            <%=f.select :quantity, 1..10%>
-            <%=f.submit 'Add Drink'%>
-          <%end%>
+             <%=form_for @course do |f|%>
+               <%=f.hidden_field :dinner_id, :value=>accepted.dinner.id %>
+               <%=f.collection_select :userrecipe_id, @user.userrecipes, :id, :recipe_name%>
+               <%=f.select :course_type, Recipe.course_type%>
+               <%=f.submit 'Add Course'%>
+             <%end%>
+           <%=form_for @drink do |f|%>
+             <%=f.hidden_field :dinner_id, :value=>accepted.dinner.id %>
+             <%=f.hidden_field :user_id, :value=>@user.id%>
+             <%=f.select :drink_type, Drink.drink_designations%>
+             <%=f.select :quantity, 1..10%>
+             <%=f.submit 'Add Drink'%>
+             <%end%>
+       <% end %>
+       </li>
+     <%end%>
+   </ul>
+
+    <h5>  Past Dinners:</h5>
+     <ul>
+       <%@accepted_dinners.each do |accepted| %>
+           <% if accepted.dinner.date < Time.now%>
+         <li>
+             <%=link_to accepted.dinner.name, dinner_path(accepted.dinner)%>
+         <% end %>
+
         </li>
-      <%end%>
-  <% end %>
-  </ul>
+       <%end%>
+ <% end %>
+ </ul>
 
 <%= button_to("New Recipe", new_user_recipe_path(@user), method: :get) %>
 <%= button_to("Logout", logout_path, method: :delete)%>

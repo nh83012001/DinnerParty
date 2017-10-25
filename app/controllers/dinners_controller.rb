@@ -1,6 +1,20 @@
 class DinnersController < ApplicationController
   before_filter :authorize_invitee_host, only: :show
 
+  def authorize_invitee_host
+    if session[:user_id] == nil
+      render :error
+    else
+      @dinner = Dinner.find(params[:id])
+      @user = User.find(session[:user_id])
+      @invite = @dinner.invites.find_by(user: @user)
+      unless @dinner.host == @user || @invite
+        render :error
+      end
+    end
+  end
+
+  ##
 
   def show
     @dinner = Dinner.find(params[:id])
