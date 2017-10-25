@@ -1,0 +1,17 @@
+<h3>Comments:</h3>
+  <ul>
+  <%@dinner.comments.each do |comment| %>
+    <li><%=comment.content%><br>
+      -<%=comment.user.name%>
+      <%if comment.user_id == @user.id%>
+        <%=button_to 'Delete comment!', "/comments/#{comment.id}", method: :delete, class: "delete_button"%>
+      <%end%>
+    </li>
+  <%end%>
+  </ul>
+  <%=form_for @comment do |f|%>
+      <%=f.hidden_field :dinner_id, :value=> @dinner.id%>
+      <%=f.hidden_field :user_id, :value=> @user.id%>
+      <%=f.text_area :content%>
+      <%=f.submit%>
+  <%end%>

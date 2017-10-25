@@ -5,6 +5,7 @@ class Dinner < ApplicationRecord
   has_many :userrecipes, through: :courses
   belongs_to :host, class_name: "User"
   has_many :drinks
+  has_many :comments
 
   validates :location, presence: true
   validates :name, presence: true

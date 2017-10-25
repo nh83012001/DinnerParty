@@ -23,6 +23,7 @@ class DinnersController < ApplicationController
     @user = User.find(session[:user_id])
     @invite = Invite.new
     @uninvited = User.uninvited(@dinner)
+    @comment = Comment.new
   end
 
   def new

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :comments, only:[:create, :destroy]
   resources :drinks, only:[:create, :destroy]
 
   get '/login',   to: 'sessions#login'
