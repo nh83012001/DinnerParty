@@ -10,13 +10,14 @@ Rails.application.routes.draw do
     get '/fork', to: 'recipes#fork', as: 'fork'
   end
 
-  resources :users
+  resources :users, except: :destroy
 
-  resources :invites do
+  resources :invites, only: [:create, :destroy]do
     put '/accept', to: 'invites#accept', as: 'accept'
     put '/reject', to: 'invites#reject', as: 'reject'
   end
-  resources :dinners
+
+  resources :dinners, except: :index
 
   resources :courses, only:[:create, :destroy]
 

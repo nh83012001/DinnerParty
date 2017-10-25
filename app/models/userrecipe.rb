@@ -10,5 +10,9 @@ class Userrecipe < ApplicationRecord
 
   def user_name
     self.user.name
-  end 
+  end
+
+  def self.destroy_related(id)
+    self.where(recipe_id: id).destroy_all
+  end
 end

@@ -71,6 +71,14 @@ class RecipesController < ApplicationController
     end
   end
 
+  def destroy
+    @recipe = Recipe.find(params[:id])
+    Userrecipe.destroy_related(params[:id])
+    Course.destroy_related(params[:id])
+    @recipe.destroy
+    redirect_to recipes_path
+  end
+
   private
   def recipe_params
     params.require(:recipe).permit(:name, :ingredients, :instructions, :owner_id)
