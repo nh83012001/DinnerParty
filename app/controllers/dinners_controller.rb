@@ -8,6 +8,8 @@ class DinnersController < ApplicationController
     @course = Course.new
     @drink = Drink.new
     @user = User.find(session[:user_id])
+    @invite = Invite.new
+    @uninvited = User.uninvited(@dinner)
   end
 
   def new
@@ -17,12 +19,36 @@ class DinnersController < ApplicationController
   end
 
   def create
-    @dinner = Dinner.create(dinner_params)
-    params[:dinner][:user_ids].each do |id|
-      @dinner.users << User.find(id) unless id==""
-    end
-    redirect_to dinner_path(@dinner)
+    @dinner = Dinner.new(dinner_params)
 
+    if @dinner.save
+      params[:dinner][:user_ids].each do |id|
+        @dinner.users << User.find(id) unless id==""
+      end
+      redirect_to dinner_path(@dinner)
+    else
+      render :new
+    end
+  end
+
+  def edit
+    @dinner = Dinner.find(params[:id])
+  end
+
+  def update
+    @dinner = Dinner.find(params[:id])
+    @dinner.assign_attributes(dinner_params)
+    if @dinner.save
+      redirect_to dinner_path(@dinner)
+    else
+      render :edit
+    end
+  end
+
+  def destroy
+    @dinner = Dinner.find(params[:id])
+    @dinner.destroy
+    redirect_to my_profile_path
   end
 
   private

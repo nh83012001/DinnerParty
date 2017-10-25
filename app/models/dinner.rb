@@ -6,6 +6,11 @@ class Dinner < ApplicationRecord
   belongs_to :host, class_name: "User"
   has_many :drinks
 
+  validates :location, presence: true
+  validates :name, presence: true
+  validates :date, presence: true
+  validates :attire, presence: true
+
 
   def accepted_invitations
     self.invites.where(accepted: true)

@@ -21,6 +21,10 @@ class User < ApplicationRecord
     user = User.new(user_params).save
   end
 
+  def self.uninvited(dinner)
+    User.where("id NOT IN (?)", dinner.invites.pluck(:user_id))
+  end
+
   private
 
   def user_params

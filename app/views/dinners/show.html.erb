@@ -1,9 +1,15 @@
 <h1><%= @dinner.name %></h1>
 <p><%= @dinner.date.strftime("%A")%>, <%= @dinner.date.strftime("%B")%> <%= @dinner.date.strftime("%d")%> <%= @dinner.date.strftime("%Y")%></p>
 
+
 <p>Location: <%= @dinner.location%></p>
 <p>Attire: <%= @dinner.attire%></p>
 <p>Host: <%= @dinner.host.name%></p>
+
+<% if @user.id == @dinner.host_id %>
+  <%= button_to("Edit Dinner Party", edit_dinner_path(@dinner), method: :get)%>
+  <%= button_to("Cancel Dinner Party", dinner_path(@dinner), method: :delete, data: { confirm: "Are you sure you want to cancel this dinner?" })%>
+<% end %>
 
 <h3>Courses: <%= @dinner.courses.count %></h3>
 <br>
@@ -44,21 +50,28 @@
   <%end%>
 </ul>
 <h3>Invites: <%= @dinner.invites.count %></h3>
-Declined: <%= @dinner.declined_invitations.count %>
-<ul>
-  <%@dinner.declined_invitations.each do |invite|%>
+<% if @user.id == @dinner.host_id %>
+  <%= form_for @invite do |f| %>
+    <%= f.collection_select :user_id, @uninvited, :id, :name %>
+    <%= f.hidden_field :dinner_id, value: @dinner.id %>
+    <%= f.submit "Invite" %>
+  <% end %>
+<% end %>
+Attending: <%= @dinner.accepted_invitations.count %>
+  <ul>
+  <%@dinner.accepted_invitations.each do |invite|%>
     <li><%=invite.user.name%></li>
   <%end%>
-</ul>
+  </ul>
 Pending: <%= @dinner.pending_invitations.count %>
   <ul>
   <%@dinner.pending_invitations.each do |invite|%>
     <li><%=invite.user.name%></li>
   <%end%>
   </ul>
-Attending: <%= @dinner.accepted_invitations.count %>
+Declined: <%= @dinner.declined_invitations.count %>
   <ul>
-  <%@dinner.accepted_invitations.each do |invite|%>
-    <li><%=invite.user.name%></li>
-  <%end%>
+    <%@dinner.declined_invitations.each do |invite|%>
+      <li><%=invite.user.name%></li>
+    <%end%>
   </ul>
