@@ -13,4 +13,8 @@ class Recipe < ApplicationRecord
   def self.course_type
     ['appetizer', 'main course', 'desert', 'alchohol']
   end
+
+  def popularity
+    self.users.count
+  end
 end
