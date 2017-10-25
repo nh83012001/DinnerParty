@@ -6,6 +6,10 @@ class Course < ApplicationRecord
     self.userrecipe.recipe.name
   end
 
+  def recipe_id
+    self.userrecipe.recipe.id
+  end
+
   def user_name
     self.userrecipe.user.name
   end
@@ -16,5 +20,9 @@ class Course < ApplicationRecord
 
   def user
     self.userrecipe.user
+  end
+
+  def self.destroy_related(id)
+    self.where(:recipe_id == id).destroy_all
   end
 end
