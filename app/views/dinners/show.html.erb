@@ -1,5 +1,5 @@
 <h1><%= @dinner.name %></h1>
-<p><%= @dinner.date.strftime("%A")%>, <%= @dinner.date.strftime("%B")%> <%= @dinner.date.strftime("%d")%> <%= @dinner.date.strftime("%Y")%></p>
+<p><%= @dinner.date.strftime("%A %B %d, %Y at %l:%M %p")%>
 
 
 <p>Location: <%= @dinner.location%></p>
@@ -12,6 +12,16 @@
 <% end %>
 
 <h3>Courses: <%= @dinner.courses.count %></h3>
+<ul>
+<%@dinner.courses.each do |course| %>
+  <li>
+    <%=course.userrecipe.user_name%> is bringing <%=link_to course.recipe_name, recipe_path(course.recipe)%> as a <%=course.course_type%>
+    <%if course.user.id == session[:user_id] && @user.has_drink_course_privalege(@dinner)%>
+      <%=button_to 'Delete your course!', "/courses/#{course.id}", method: :delete, class: "delete_button"%>
+    <%end%>
+  </li>
+<%end%>
+</ul>
 <%if @user.has_drink_course_privalege(@dinner)%>
   <%=form_for @course do |f|%>
     <%=f.hidden_field :dinner_id, :value=>@dinner.id %>
@@ -20,28 +30,8 @@
     <%=f.submit 'Add Course'%>
   <%end%>
 <%end%>
-<ul>
-<%@dinner.courses.each do |course| %>
-  <li>
-    <%=course.userrecipe.user_name%> is bringing <%=link_to course.recipe_name, recipe_path(course.recipe)%> which is a <%=course.course_type%> course!
-    <%if course.user.id == session[:user_id] && @user.has_drink_course_privalege(@dinner)%>
-      <%=button_to 'Delete your course!', "/courses/#{course.id}", method: :delete, class: "delete_button"%>
-    <%end%>
-  </li>
-<%end%>
-</ul>
 <h3> Drinks: </h3>
-<%if @user.has_drink_course_privalege(@dinner)%>
-  <%=form_for @drink do |f|%>
-    <%=f.hidden_field :dinner_id, :value=>@dinner.id %>
-    <%=f.hidden_field :user_id, :value=>@user.id%>
-    <%=f.select :drink_type, Drink.drink_designations%>
-    <%=f.select :quantity, 1..10%>
-    <%=f.submit 'Add Drink'%>
-  <%end%>
-<%end%>
 <ul>
-
   <%@dinner.drinks.each do |drink|%>
   <li>
     <%=drink.user.name%> is bringing <%=drink.quantity.to_s%> <%if drink.quantity > 1 %> bottles <%else%>bottle <%end%> of <%=drink.drink_type%>.
@@ -51,6 +41,15 @@
   </li>
   <%end%>
 </ul>
+<%if @user.has_drink_course_privalege(@dinner)%>
+  <%=form_for @drink do |f|%>
+    <%=f.hidden_field :dinner_id, :value=>@dinner.id %>
+    <%=f.hidden_field :user_id, :value=>@user.id%>
+    <%=f.select :drink_type, Drink.drink_designations%>
+    <%=f.select :quantity, 1..10%>
+    <%=f.submit 'Add Drink'%>
+  <%end%>
+<%end%>
 <h3>Invites: <%= @dinner.invites.count %></h3>
 <% if @user.id == @dinner.host_id && @dinner.upcoming? %>
   <%= form_for @invite do |f| %>
@@ -58,6 +57,7 @@
     <%= f.hidden_field :dinner_id, value: @dinner.id %>
     <%= f.submit "Invite" %>
   <% end %>
+  <br>
 <% end %>
 Attending: <%= @dinner.accepted_invitations.count %>
   <ul>
