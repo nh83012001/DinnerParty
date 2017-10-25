@@ -61,6 +61,13 @@
             <%=f.select :course_type, Recipe.course_type%>
             <%=f.submit 'Add Course'%>
           <%end%>
+          <%=form_for @drink do |f|%>
+            <%=f.hidden_field :dinner_id, :value=>accepted.dinner.id %>
+            <%=f.hidden_field :user_id, :value=>@user.id%>
+            <%=f.select :drink_type, Drink.drink_designations%>
+            <%=f.select :quantity, 1..10%>
+            <%=f.submit 'Add Drink'%>
+          <%end%>
         </li>
       <%end%>
   <% end %>
