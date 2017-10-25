@@ -25,4 +25,8 @@ class Course < ApplicationRecord
   def self.destroy_related(id)
     self.where(:recipe_id == id).destroy_all
   end
+
+  def self.destroy_without_dinner(id)
+    self.where(:dinner_id == id).destroy_all
+  end
 end

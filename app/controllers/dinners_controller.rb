@@ -60,6 +60,8 @@ class DinnersController < ApplicationController
 
   def destroy
     @dinner = Dinner.find(params[:id])
+    Invite.destroy_without_dinner(params[:id])
+    Course.destroy_without_dinner(params[:id])
     @dinner.destroy
     redirect_to my_profile_path
   end
