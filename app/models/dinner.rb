@@ -23,4 +23,8 @@ class Dinner < ApplicationRecord
   def pending_invitations
     self.invites.where(accepted: nil)
   end
+
+  def upcoming?
+    self.date > Time.now
+  end
 end

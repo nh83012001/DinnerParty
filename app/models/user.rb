@@ -25,6 +25,15 @@ class User < ApplicationRecord
     User.where("id NOT IN (?)", dinner.invites.pluck(:user_id))
   end
 
+  def has_drink_course_privalege(dinner)
+    invite = dinner.invites.find_by(user: self)
+    if ((invite != nil && invite.accepted == true ) || dinner.host == self) && dinner.upcoming?
+      true
+    else
+      false
+    end
+  end
+
   private
 
   def user_params
