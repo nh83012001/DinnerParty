@@ -9,7 +9,7 @@
 <%= j.label :attire %>
 <%= j.text_field :attire %>
 <br>
-<%= j.collection_check_boxes :user_ids, User.all, :id, :name %>
+<%= j.collection_check_boxes :user_ids, @other_users, :id, :name %>
 <br>
 
 <br>

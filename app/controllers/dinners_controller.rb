@@ -27,6 +27,7 @@ class DinnersController < ApplicationController
 
   def new
     @owner = User.find(session[:user_id])
+    @other_users = User.other_users(session[:user_id])
     @dinner = Dinner.new
     @dinner.invites.build
   end

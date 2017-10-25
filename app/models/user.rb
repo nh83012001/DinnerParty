@@ -34,6 +34,10 @@ class User < ApplicationRecord
     end
   end
 
+  def self.other_users(current_id)
+    self.where.not(id: current_id)
+  end
+
   private
 
   def user_params
