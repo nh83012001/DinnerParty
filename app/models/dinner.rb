@@ -4,6 +4,7 @@ class Dinner < ApplicationRecord
   has_many :users, through: :invites
   has_many :userrecipes, through: :courses
   belongs_to :host, class_name: "User"
+  has_many :drinks
 
 
   def accepted_invitations
@@ -16,5 +17,5 @@ class Dinner < ApplicationRecord
 
   def pending_invitations
     self.invites.where(accepted: nil)
-  end 
+  end
 end

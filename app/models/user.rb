@@ -8,7 +8,7 @@ class User < ApplicationRecord
   has_many :owned_recipes, class_name:  "Recipe",
                                 foreign_key: "owner_id",
                                 dependent:   :destroy
-
+  has_many :drinks
 
 
   validates :username, uniqueness: true

@@ -19,12 +19,19 @@
     <ul>
       <%@created_dinners.each do |dinner|%>
         <li>
-          <%=link_to dinner.name, dinner_path(dinner)%> - PUT Y/N HERE
+          <%=link_to dinner.name, dinner_path(dinner)%>
           <%=form_for @course do |f|%>
             <%=f.hidden_field :dinner_id, :value=>dinner.id %>
             <%=f.collection_select :userrecipe_id, @user.userrecipes, :id, :recipe_name%>
             <%=f.select :course_type, Recipe.course_type%>
             <%=f.submit 'Add Course'%>
+          <%end%>
+          <%=form_for @drink do |f|%>
+            <%=f.hidden_field :dinner_id, :value=>dinner.id %>
+            <%=f.hidden_field :user_id, :value=>@user.id%>
+            <%=f.select :drink_type, Drink.drink_designations%>
+            <%=f.select :quantity, 1..10%>
+            <%=f.submit 'Add Drink'%>
           <%end%>
         </li>
       <%end%>

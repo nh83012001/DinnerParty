@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :drinks, only:[:create, :destroy]
+
   get '/login',   to: 'sessions#login'
   post '/login',   to: 'sessions#create'
   delete '/logout',  to: 'sessions#destroy'
@@ -9,12 +11,15 @@ Rails.application.routes.draw do
   end
 
   resources :users
+
   resources :invites do
     put '/accept', to: 'invites#accept', as: 'accept'
     put '/reject', to: 'invites#reject', as: 'reject'
   end
   resources :dinners
-  resources :courses
+
+  resources :courses, only:[:create, :destroy]
+
   get 'myprofile', to: 'users#myprofile', as: 'my_profile'
   get 'users/:id/new', to: 'users#newrecipe', as: 'new_user_recipe'
 

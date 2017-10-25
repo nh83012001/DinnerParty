@@ -17,6 +17,18 @@
   </li>
 <%end%>
 </ul>
+
+<h3> Drinks: </h3>
+<ul>
+  <%@dinner.drinks.each do |drink|%>
+  <li>
+    <%=drink.user.name%> is bringing <%=drink.quantity.to_s%> <%if drink.quantity > 1 %> bottle <%else%>bottles <%end%> of <%=drink.drink_type%>.
+    <%if drink.user.id == session[:user_id]%>
+      <%=button_to 'Delete your drink!', "/drinks/#{drink.id}", method: :delete, class: "delete_button"%>
+    <%end%>
+  </li>
+  <%end%>
+</ul>
 <h3>Invites: <%= @dinner.invites.count %></h3>
 Declined: <%= @dinner.declined_invitations.count %>
 <ul>
