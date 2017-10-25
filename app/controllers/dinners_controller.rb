@@ -1,7 +1,6 @@
 class DinnersController < ApplicationController
-  def index
-    @dinners = Dinner.all
-  end
+  before_filter :authorize_invitee_host, only: :show
+
 
   def show
     @dinner = Dinner.find(params[:id])
@@ -50,6 +49,8 @@ class DinnersController < ApplicationController
     @dinner.destroy
     redirect_to my_profile_path
   end
+
+
 
   private
 
