@@ -22,7 +22,7 @@ class DinnersController < ApplicationController
     @drink = Drink.new
     @user = User.find(session[:user_id])
     @invite = Invite.new
-    @uninvited = User.uninvited(@dinner)
+    @uninvited = User.uninvited(@dinner, @user)
   end
 
   def new

@@ -27,4 +27,5 @@ class Dinner < ApplicationRecord
   def upcoming?
     self.date > Time.now
   end
+
 end
