@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
+
   root 'sessions#login'
+
+  resources :comments, only:[:create, :destroy]
 
   resources :drinks, only:[:create, :destroy]
 

@@ -9,6 +9,7 @@ class User < ApplicationRecord
                                 foreign_key: "owner_id",
                                 dependent:   :destroy
   has_many :drinks
+  has_many :comments
 
 
   validates :username, uniqueness: true
