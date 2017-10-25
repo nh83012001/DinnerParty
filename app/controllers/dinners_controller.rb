@@ -5,6 +5,7 @@ class DinnersController < ApplicationController
 
   def show
     @dinner = Dinner.find(params[:id])
+    @owner = User.find(session[:user_id])
   end
 
   def new
@@ -19,7 +20,26 @@ class DinnersController < ApplicationController
       @dinner.users << User.find(id) unless id==""
     end
     redirect_to dinner_path(@dinner)
+  end
 
+  def edit
+    @dinner = Dinner.find(params[:id])
+  end
+
+  def update
+    @dinner = Dinner.find(params[:id])
+    @dinner.assign_attributes(dinner_params)
+    if @dinner.save
+      redirect_to dinner_path(@dinner)
+    else
+      render :edit
+    end
+  end
+
+  def destroy
+    @dinner = Dinner.find(params[:id])
+    @dinner.destroy
+    redirect_to my_profile_path
   end
 
   private
