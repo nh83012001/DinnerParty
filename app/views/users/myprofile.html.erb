@@ -20,7 +20,10 @@
       <%@created_dinners.each do |dinner|%>
         <li>
           <%=link_to dinner.name, dinner_path(dinner)%>
+          <% if dinner.date > Time.now %>
           <%=form_for @course do |f|%>
+
+
             <%=f.hidden_field :dinner_id, :value=>dinner.id %>
             <%=f.collection_select :userrecipe_id, @user.userrecipes, :id, :recipe_name%>
             <%=f.select :course_type, Recipe.course_type%>
@@ -33,6 +36,8 @@
             <%=f.select :quantity, 1..10%>
             <%=f.submit 'Add Drink'%>
           <%end%>
+
+          <%end %>
         </li>
       <%end%>
     </ul>
