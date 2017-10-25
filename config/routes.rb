@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  root 'sessions#login'
+
   resources :drinks, only:[:create, :destroy]
 
   get '/login',   to: 'sessions#login'
