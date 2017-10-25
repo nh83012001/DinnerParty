@@ -5,6 +5,9 @@ class DinnersController < ApplicationController
 
   def show
     @dinner = Dinner.find(params[:id])
+    @course = Course.new
+    @drink = Drink.new
+    @user = User.find(session[:user_id])
   end
 
   def new

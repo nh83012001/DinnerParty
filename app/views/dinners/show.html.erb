@@ -7,6 +7,12 @@
 
 <h3>Courses: <%= @dinner.courses.count %></h3>
 <br>
+<%=form_for @course do |f|%>
+  <%=f.hidden_field :dinner_id, :value=>@dinner.id %>
+  <%=f.collection_select :userrecipe_id, @user.userrecipes, :id, :recipe_name%>
+  <%=f.select :course_type, Recipe.course_type%>
+  <%=f.submit 'Add Course'%>
+<%end%>
 <ul>
 <%@dinner.courses.each do |course| %>
   <li>
@@ -17,9 +23,17 @@
   </li>
 <%end%>
 </ul>
-
 <h3> Drinks: </h3>
+
+  <%=form_for @drink do |f|%>
+    <%=f.hidden_field :dinner_id, :value=>@dinner.id %>
+    <%=f.hidden_field :user_id, :value=>@user.id%>
+    <%=f.select :drink_type, Drink.drink_designations%>
+    <%=f.select :quantity, 1..10%>
+    <%=f.submit 'Add Drink'%>
+  <%end%>
 <ul>
+
   <%@dinner.drinks.each do |drink|%>
   <li>
     <%=drink.user.name%> is bringing <%=drink.quantity.to_s%> <%if drink.quantity > 1 %> bottles <%else%>bottle <%end%> of <%=drink.drink_type%>.
