@@ -25,8 +25,20 @@
 <%if @user.has_drink_course_privalege(@dinner)%>
   <%=form_for @course do |f|%>
     <%=f.hidden_field :dinner_id, :value=>@dinner.id %>
+      <div class="field">
+      <div class="control">
+      <div class="select is-success">
     <%=f.collection_select :userrecipe_id, @user.userrecipes, :id, :recipe_name%>
+      </div>
+      </div>
+      </div>
+      <div class="field">
+      <div class="control">
+      <div class="select is-success">
     <%=f.select :course_type, Recipe.course_type%>
+      </div>
+      </div>
+      </div>
     <%=f.submit 'Add Course'%>
   <%end%>
 <%end%>
@@ -45,15 +57,33 @@
   <%=form_for @drink do |f|%>
     <%=f.hidden_field :dinner_id, :value=>@dinner.id %>
     <%=f.hidden_field :user_id, :value=>@user.id%>
+    <div class="field">
+    <div class="control">
+    <div class="select is-success">
     <%=f.select :drink_type, Drink.drink_designations%>
+  </div>
+  </div>
+  </div>
+  <div class="field">
+  <div class="control">
+  <div class="select is-success">
     <%=f.select :quantity, 1..10%>
+  </div>
+  </div>
+  </div>
     <%=f.submit 'Add Drink'%>
   <%end%>
 <%end%>
 <h3>Invites: <%= @dinner.invites.count %></h3>
 <% if @user.id == @dinner.host_id && @dinner.upcoming? %>
   <%= form_for @invite do |f| %>
+  <div class="field">
+  <div class="control">
+  <div class="select is-success">
     <%= f.collection_select :user_id, @uninvited, :id, :name %>
+  </div>
+  </div>
+  </div>
     <%= f.hidden_field :dinner_id, value: @dinner.id %>
     <%= f.submit "Invite" %>
   <% end %>
@@ -75,6 +105,9 @@ Declined: <%= @dinner.declined_invitations.count %>
   <ul>
     <%@dinner.declined_invitations.each do |invite|%>
       <li><%=invite.user.name%></li>
+    </div>
+    </div>
+    </div>
     <%end%>
   </ul>
 
