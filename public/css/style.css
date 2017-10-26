@@ -5,8 +5,8 @@ h1 {
   border-style: solid;
   text-align: center;
   border-width: thin;
-  padding-left: 0px !important;
-  padding-right: 0px !important;
+  padding-left: 0px
+  padding-right: 0px
 }
 
 h4  {
@@ -35,8 +35,8 @@ input[type=button], input[type=submit], input[type=reset] {
     background-color: SeaGreen;
     border: none;
     color: white;
-    padding: 16px 32px;
+    padding: 8px 16px;
     text-decoration: none;
-    margin: 4px 2px;
+    margin: 2px 1px;
     cursor: pointer;
 }
