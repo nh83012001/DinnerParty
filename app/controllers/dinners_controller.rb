@@ -1,12 +1,14 @@
 class DinnersController < ApplicationController
   before_filter :authorize_invitee_host, only: :show
+  include DinnersHelper
 
   def authorize_invitee_host
-    if session[:user_id] == nil
+
+    if get_user_id == nil
       render :error
     else
       @dinner = Dinner.find(params[:id])
-      @user = User.find(session[:user_id])
+      @user = get_user_reference
       @invite = @dinner.invites.find_by(user: @user)
       unless @dinner.host == @user || @invite
         render :error
@@ -20,7 +22,7 @@ class DinnersController < ApplicationController
     @dinner = Dinner.find(params[:id])
     @course = Course.new
     @drink = Drink.new
-    @user = User.find(session[:user_id])
+    @user = get_user_reference
     @invite = Invite.new
 
     @uninvited = User.uninvited(@dinner, @user)
@@ -29,8 +31,8 @@ class DinnersController < ApplicationController
   end
 
   def new
-    @owner = User.find(session[:user_id])
-    @other_users = User.other_users(session[:user_id])
+    @owner = get_user_reference
+    @other_users = User.other_users(get_user_id)
     @dinner = Dinner.new
     @dinner.invites.build
   end

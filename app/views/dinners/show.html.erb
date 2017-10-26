@@ -16,7 +16,7 @@
 <%@dinner.courses.each do |course| %>
   <li>
     <%=course.userrecipe.user_name%> is bringing <%=link_to course.recipe_name, recipe_path(course.recipe)%> as a <%=course.course_type%>
-    <%if course.user.id == session[:user_id] && @user.has_drink_course_privalege(@dinner)%>
+    <%if test_ownership(course, @user, @dinner)%>
       <%=button_to 'Delete your course!', "/courses/#{course.id}", method: :delete, class: "delete_button"%>
     <%end%>
   </li>
@@ -35,7 +35,7 @@
   <%@dinner.drinks.each do |drink|%>
   <li>
     <%=drink.user.name%> is bringing <%=drink.quantity.to_s%> <%if drink.quantity > 1 %> bottles <%else%>bottle <%end%> of <%=drink.drink_type%>.
-    <%if drink.user.id == session[:user_id] && @user.has_drink_course_privalege(@dinner)%>
+    <%if test_ownership(drink, @user, @dinner)%>
       <%=button_to 'Delete your drink!', "/drinks/#{drink.id}", method: :delete, class: "delete_button"%>
     <%end%>
   </li>

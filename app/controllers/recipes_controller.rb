@@ -1,7 +1,9 @@
 class RecipesController < ApplicationController
+  include RecipesHelper
+
   def new
     @recipe = Recipe.new
-    @owner = User.find(session[:user_id])
+    @owner = get_user_reference
   end
 
   def create
@@ -40,7 +42,7 @@ class RecipesController < ApplicationController
   end
 
   def update
-    @user = User.find(session[:user_id])
+    @user = get_user_reference
     @recipe = Recipe.find(params[:id])
     if @recipe.owner_id == session[:user_id]
       alter_recipe_by_owner
