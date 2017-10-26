@@ -1,3 +1,4 @@
+<h1>Fork This Recipe and Make It Your Own</h1><br><br>
 <%= form_for @recipe, :url => {:action => "create"} do |f| %>
   <%= f.label :name %>
   <%= f.text_field :name, value: @recipe.name %>

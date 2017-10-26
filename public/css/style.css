@@ -18,13 +18,13 @@ h4  {
 input {
   font-size: 1.0em;
 }
-html {height: 100%;}
+html {background: fixed;}
 
 body {
   padding-left: 50px;
   padding-right: 50px;
   background-color: floralwhite;
-  height: 100%;
+
 }
 
 h3 {

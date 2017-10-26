@@ -83,8 +83,7 @@
   <% end %>
 
   <% if @accepted_dinners %>
-  <h4> Accepted Dinners </h4>
-    <h4> Upcoming Dinners </h4>
+  <h4> Upcoming Dinners </h4>
    <ul>
      <%@accepted_dinners.each do |accepted| %>
      <% if accepted.dinner.upcoming? && accepted.dinner.host != @user%>

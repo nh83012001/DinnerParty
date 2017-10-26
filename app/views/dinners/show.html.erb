@@ -1,6 +1,5 @@
-<h1><%= @dinner.name %></h1>
+<h1><%= @dinner.name %></h1><br><br>
 <br>
-
 <% if @user.id == @dinner.host_id && @dinner.upcoming?%>
 <div class="columns">
   <div class="column has-text-right">
@@ -29,8 +28,6 @@
     </div>
 
   </div>
-  <br>
-
   <div class="columns">
     <div class="column has-text-centered">
       <h4>Attending: <%= @dinner.accepted_invitations.count %></h4>
