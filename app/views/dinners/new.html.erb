@@ -13,9 +13,17 @@
 <br>
 <br>
 <%= j.collection_check_boxes :user_ids, @other_users, :id, :name %>
+<button type="button" id="check_all">
+    Check / Uncheck All
+</button>
 <br>
 
 <br>
 <%=j.submit %>
 <% end %>
 </div>
+
+
+<script type='text/javascript'>
+    $('#check_all').on("click", function(){ $('input[type="checkbox"]').click(); });
+</script>
