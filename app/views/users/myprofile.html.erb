@@ -91,15 +91,39 @@
           <%=link_to accepted.dinner.name, dinner_path(accepted.dinner)%>
              <%=form_for @course do |f|%>
                <%=f.hidden_field :dinner_id, :value=>accepted.dinner.id %>
+               <div class="field">
+               <div class="control">
+               <div class="select is-success">
                <%=f.collection_select :userrecipe_id, @user.userrecipes, :id, :recipe_name%>
+               </div>
+               </div>
+               </div>
+               <div class="field">
+               <div class="control">
+               <div class="select is-success">
                <%=f.select :course_type, Recipe.course_type%>
+               </div>
+               </div>
+               </div>
                <%=f.submit 'Add Course'%>
              <%end%>
            <%=form_for @drink do |f|%>
              <%=f.hidden_field :dinner_id, :value=>accepted.dinner.id %>
              <%=f.hidden_field :user_id, :value=>@user.id%>
-             <%=f.select :drink_type, Drink.drink_designations%>
-             <%=f.select :quantity, 1..10%>
+             <div class="field">
+             <div class="control">
+             <div class="select is-success">
+               <%=f.select :drink_type, Drink.drink_designations%>
+             </div>
+             </div>
+             </div>
+             <div class="field">
+             <div class="control">
+             <div class="select is-success">
+               <%=f.select :quantity, 1..10%>
+             </div>
+             </div>
+             </div>
              <%=f.submit 'Add Drink'%>
              <%end%>
        <% end %>
