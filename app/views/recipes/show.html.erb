@@ -1,36 +1,45 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
-    <title></title>
   </head>
+  <style>
+    h3 {
+
+    }
+  </style>
 
   <body>
-    <% flash.each do |name, msg| -%>
-          <%= content_tag :div, msg, class: name %>
-    <%end-%>
     <h1><%= @recipe.name %></h1>
-    <p>This recipe is saved in <%= pluralize(@recipe.popularity, "cookbook") %> </p>
-
     <br>
-    <h4>Ingredients</h4>
-    <p><%= @recipe.ingredients %></p>
-    <h4>Instructions</h4>
-    <p><%= @recipe.instructions %></p>
+    <div class="container is-fluid has-text-centered">
+      <p>This recipe is saved in <strong><%= pluralize(@recipe.popularity, "cookbook") %></strong> </p>
+    </div>
     <br>
-    <h4>Owner</h4>
-    <p><%= link_to @recipe.owner.name, user_path(@recipe.owner) %></p>
-    <h4>Users</h4>
-    <% @recipe.users.each do |user| %>
-      <p><%= link_to user.name, user_path(user) %></p>
-    <%end%>
+    <div class='columns'>
+      <div class='column'>
+        <h4>Ingredients</h4>
+        <p><%= @recipe.ingredients %></p>
+        <h4>Instructions</h3>
+        <p><%= @recipe.instructions %></p>
+        <br>
+        <h4>Owner:</h4>
+        <p><%= link_to @recipe.owner.name, user_path(@recipe.owner) %></p>
+      </div>
+      <div class='column'>
+        <h4>In these users' cookbooks:</h4>
+        <%@recipe.users.each do |user| %>
+        <p><%= link_to user.name, user_path(user) %></p>
+        <%end%>
+      </div>
+    </div>
     <!--  May need to fix rout for clarity's sake!!-->
-    <%if session[:user_id] != nil && session[:user_id] != @recipe.owner_id%>
+    <%if test_recipe_ownership%>
       <p><%= button_to("Add Recipe to Your Recipes", recipe_path, method: :patch )%>
       <%= button_to("Fork This Recipe to Make It Your Own!", recipe_fork_path(@recipe), method: :get )%></p>
     <%end%>
-    <%if session[:user_id] == @recipe.owner_id%>
+    <%if get_user_id == @recipe.owner_id%>
       <p><%= button_to("Edit This Recipe", edit_recipe_path, method: :get )%><%= button_to("Delete This Recipe", recipe_path, method: :delete, data: { confirm: "Are you sure you want to delete this recipe?" })%></p>
     <%end%>
+
   </body>
 </html>

@@ -89,7 +89,6 @@
      <%@accepted_dinners.each do |accepted| %>
      <% if accepted.dinner.upcoming? && accepted.dinner.host != @user%>
        <li>
-
           <%=link_to accepted.dinner.name, dinner_path(accepted.dinner)%>
              <%=form_for @course do |f|%>
                <%=f.hidden_field :dinner_id, :value=>accepted.dinner.id %>

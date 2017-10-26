@@ -32,7 +32,7 @@ class UsersController < ApplicationController
   def myprofile
     @course = Course.new
     @drink = Drink.new
-    @user = User.find(session[:user_id])
+    @user = get_user_reference
     @created_dinners = Dinner.where(host_id: @user.id)
     @invited_dinners = @user.invites.where(accepted: nil)
     @accepted_dinners = @user.invites.where(accepted: true)
