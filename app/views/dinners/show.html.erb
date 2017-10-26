@@ -1,7 +1,8 @@
 <h1><%= @dinner.name %></h1>
 <br>
-<div class="columns">
+
 <% if @user.id == @dinner.host_id && @dinner.upcoming?%>
+<div class="columns">
   <div class="column has-text-right">
   <%= button_to("Edit Dinner Party", edit_dinner_path(@dinner), method: :get)%>
   </div>
