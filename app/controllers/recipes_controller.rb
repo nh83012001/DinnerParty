@@ -8,6 +8,7 @@ class RecipesController < ApplicationController
 
   def create
     @recipe = Recipe.new(recipe_params)
+    @user = get_user_reference
     if @recipe.save
       # @recipe.user_ids << params[:recipe][:owner_id]
       @recipe.users << @recipe.owner
@@ -28,6 +29,7 @@ class RecipesController < ApplicationController
   end
 
   def index
+    @user = get_user_reference
     @recipes = Recipe.all
 
     if params[:search]

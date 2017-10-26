@@ -46,6 +46,8 @@ class DinnersController < ApplicationController
       end
       redirect_to dinner_path(@dinner)
     else
+      @owner = get_user_reference
+      @other_users = User.other_users(get_user_id)
       render :new
     end
   end

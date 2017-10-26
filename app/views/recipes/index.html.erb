@@ -11,3 +11,7 @@
   <p> <%= link_to recipe.name, recipe_path(recipe)%> </p>
   <%end%>
 </body>
+<br>
+
+
+<%= button_to("Add a New Recipe", new_user_recipe_path(@user), method: :get) %>

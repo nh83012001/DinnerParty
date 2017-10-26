@@ -7,11 +7,18 @@ h1 {
   border-width: thin;
   padding-left: 0px;
   padding-right: 0px;
+  border-radius: 20px;
 
 }
 
 h4  {
   font-size: 1.5em;
+  color: cadetblue;
+  font-weight: bold;
+}
+
+h6 {
+  font-size: 1.1em;
   color: cadetblue;
   font-weight: bold;
 }
@@ -40,6 +47,7 @@ input[type=button], input[type=submit], input[type=reset] {
     text-decoration: none;
     margin: 1px 1px;
     cursor: pointer;
+    border-radius: 4px;
 }
 
 comment {

@@ -1,5 +1,7 @@
 
 <div class="field">
+
+<h1>Register a New User</h1><br>
 <%if @user.errors.any? %>
   <ul>
     <%@user.errors.full_messages.each do |msg|%>
@@ -7,7 +9,6 @@
     <%end%>
   </ul>
 <%end%>
-<h1>Register a New User</h1><br>
 <%= form_for :user, url: '/users' do |f| %>
   Name: <%= f.text_field :name %>
   Username: <%= f.text_field :username %>

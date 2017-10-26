@@ -56,10 +56,11 @@
         </ul>
     </div>
     </div>
-    <br><br>
+    <br>
 
 
   <% if @user.id == @dinner.host_id && @dinner.upcoming? %>
+    <h6>Invite More Friends</h6>
     <%= form_for @invite do |f| %>
     <div class="field">
     <div class="control">
@@ -72,6 +73,7 @@
       <%= f.submit "Invite" %>
     <% end %>
     <br>
+
   <% end %>
 
 
@@ -94,6 +96,8 @@
     <%end%>
     </ul>
     <%if @user.has_drink_course_privalege(@dinner)%>
+    <br>
+    <h6>What food are you bringing?</h6>
       <%=form_for @course do |f|%>
         <%=f.hidden_field :dinner_id, :value=>@dinner.id %>
           <div class="field">
@@ -129,6 +133,8 @@
       <%end%>
     </ul>
     <%if @user.has_drink_course_privalege(@dinner)%>
+    <br>
+    <h6>What drink are you bringing?</h6>
       <%=form_for @drink do |f|%>
         <%=f.hidden_field :dinner_id, :value=>@dinner.id %>
         <%=f.hidden_field :user_id, :value=>@user.id%>

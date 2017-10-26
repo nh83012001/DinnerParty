@@ -1,5 +1,12 @@
 <h1>New Recipe</h1><br><br>
 <div class="field">
+  <%if @recipe.errors.any? %>
+    <ul>
+      <%@recipe.errors.full_messages.each do |msg|%>
+        <li><%=msg%></li>
+      <%end%>
+    </ul>
+  <%end%>
 <%= form_for @recipe do |f| %>
   <%= f.label :name %>
   <%= f.text_field :name %>
@@ -12,7 +19,7 @@
   <br>
   <%= f.text_area(:instructions, size: "50x8") %>
   <br><br>
-  <%= f.hidden_field :owner_id, value: @owner.id %>
+  <%= f.hidden_field :owner_id, value: @user.id %>
   <%= f.submit %>
 
 <% end %>

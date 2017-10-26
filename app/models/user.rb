@@ -27,12 +27,8 @@ class User < ApplicationRecord
   end
 
   def has_drink_course_privalege(dinner)
-    invite = dinner.invites.find_by(user: self)
-    if ((invite != nil && invite.accepted == true ) || dinner.host == self) && dinner.upcoming?
-      true
-    else
-      false
-    end
+
+    (dinner.host == self || dinner.users.include?(self)) && dinner.upcoming?
   end
 
   def self.other_users(current_id)

@@ -1,4 +1,12 @@
+
 <h1>Create a New Dinner Party</h1><br><br>
+<%if @dinner.errors.any? %>
+  <ul>
+    <%@dinner.errors.full_messages.each do |msg|%>
+      <li><%=msg%></li>
+    <%end%>
+  </ul>
+<%end%>
 <div class="field">
 <%= form_for @dinner do |j| %>
 <%= j.hidden_field :host_id, :value=> get_user_id %>

@@ -1,10 +1,14 @@
 
   <h1>Create a New Recipe</h1>
-
-
-
 <br>
 <body>
+  <%if @recipe.errors.any? %>
+    <ul>
+      <%@recipe.errors.full_messages.each do |msg|%>
+        <li><%=msg%></li>
+      <%end%>
+    </ul>
+  <%end%>
 
 
 <%= form_for @recipe do |f| %>

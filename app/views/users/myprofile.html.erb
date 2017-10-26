@@ -57,7 +57,7 @@
 
        <%@accepted_dinners.each do |accepted| %>
            <% if accepted.dinner.upcoming? == false && accepted.dinner.host != @user%>
-             <%=link_to accepted.dinner.name, dinner_path(accepted.dinner)%>
+             <p><%=link_to accepted.dinner.name, dinner_path(accepted.dinner)%></p>
          <% end %>
 
        <%end%>
