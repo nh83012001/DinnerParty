@@ -25,7 +25,7 @@
       <%@created_dinners.each do |dinner|%>
         <li>
           <%=link_to dinner.name, dinner_path(dinner)%>
-          <% if dinner.upcoming? %>
+          <!-- <% if dinner.upcoming? %>
           <%=form_for @course do |f|%>
             <%=f.hidden_field :dinner_id, :value=>dinner.id %>
             <div class="field">
@@ -64,7 +64,7 @@
             <%=f.submit 'Add Drink'%>
           <%end%>
 
-          <%end %>
+          <%end %> -->
         </li>
       <%end%>
     </ul>
@@ -89,7 +89,7 @@
      <% if accepted.dinner.upcoming? && accepted.dinner.host != @user%>
        <li>
           <%=link_to accepted.dinner.name, dinner_path(accepted.dinner)%>
-             <%=form_for @course do |f|%>
+             <!-- <%=form_for @course do |f|%>
                <%=f.hidden_field :dinner_id, :value=>accepted.dinner.id %>
                <div class="field">
                <div class="control">
@@ -126,7 +126,7 @@
              </div>
              <%=f.submit 'Add Drink'%>
              <%end%>
-       <% end %>
+       <% end %> -->
        </li>
      <%end%>
    </ul>

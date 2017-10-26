@@ -1,5 +1,4 @@
-<h1><%= @dinner.name %></h1><br><br>
-<br>
+<h1><%= @dinner.name %></h1><br>
 <% if @user.id == @dinner.host_id && @dinner.upcoming?%>
 <div class="columns">
   <div class="column has-text-right">
@@ -11,25 +10,25 @@
 </div>
 <% end %>
 
-<h4 class="has-text-centered"><%= @dinner.date.strftime("%A %B %d, %Y at %l:%M %p")%></h4>
+<h4 class="has-text-left"><%= @dinner.date.strftime("%A %B %d, %Y at %l:%M %p")%></h4>
 <br>
   <div class="columns">
-    <div class="column has-text-centered">
+    <div class="column has-text-left">
       <h4>Host</h4>
       <p><%= @dinner.host.name%></p>
     </div>
-    <div class="column has-text-centered">
+    <div class="column has-text-left">
       <h4>Location</h4>
       <p><%= @dinner.location%></p>
     </div>
-    <div class="column has-text-centered">
+    <div class="column has-text-left">
       <h4>Attire</h4>
       <p><%= @dinner.attire%></p>
     </div>
 
   </div>
   <div class="columns">
-    <div class="column has-text-centered">
+    <div class="column has-text-left">
       <h4>Attending: <%= @dinner.accepted_invitations.count %></h4>
         <ul>
         <%@dinner.accepted_invitations.each do |invite|%>
@@ -37,7 +36,7 @@
         <%end%>
         </ul>
     </div>
-    <div class="column has-text-centered">
+    <div class="column has-text-left">
       <h4>Pending: <%= @dinner.pending_invitations.count %></h4>
         <ul>
         <%@dinner.pending_invitations.each do |invite|%>
@@ -45,7 +44,7 @@
         <%end%>
         </ul>
     </div>
-    <div class="column has-text-centered">
+    <div class="column has-text-left">
       <h4>Declined: <%= @dinner.declined_invitations.count %></h4>
         <ul>
           <%@dinner.declined_invitations.each do |invite|%>
@@ -57,9 +56,9 @@
         </ul>
     </div>
     </div>
+    <br><br>
 
 
-  <h3>Invites: <%= @dinner.invites.count %></h3>
   <% if @user.id == @dinner.host_id && @dinner.upcoming? %>
     <%= form_for @invite do |f| %>
     <div class="field">
@@ -79,71 +78,79 @@
 
 
 
+<div class="columns">
+  <div class="column has-text-left">
 
-
-<h3>Courses: <%= @dinner.courses.count %></h3>
-<ul>
-<%@dinner.courses.each do |course| %>
-  <li>
-    <%=course.userrecipe.user_name%> is bringing <%=link_to course.recipe_name, recipe_path(course.recipe)%> as a <%=course.course_type%>
-    <%if test_ownership(course, @user, @dinner)%>
-      <%=button_to 'Delete your course!', "/courses/#{course.id}", method: :delete, class: "delete_button"%>
+    <h4>Courses: <%= @dinner.courses.count %></h4>
+    <ul>
+    <%@dinner.courses.each do |course| %>
+      <li>
+        <%=course.userrecipe.user_name%> is bringing <%=link_to course.recipe_name, recipe_path(course.recipe)%> as a <%=course.course_type%>
+        <%if test_ownership(course, @user, @dinner)%>
+          <%=button_to 'Delete your course!', "/courses/#{course.id}", method: :delete, class: "delete_button"%>
+          <br>
+        <%end%>
+      </li>
     <%end%>
-  </li>
-<%end%>
-</ul>
-<%if @user.has_drink_course_privalege(@dinner)%>
-  <%=form_for @course do |f|%>
-    <%=f.hidden_field :dinner_id, :value=>@dinner.id %>
+    </ul>
+    <%if @user.has_drink_course_privalege(@dinner)%>
+      <%=form_for @course do |f|%>
+        <%=f.hidden_field :dinner_id, :value=>@dinner.id %>
+          <div class="field">
+          <div class="control">
+          <div class="select is-success">
+        <%=f.collection_select :userrecipe_id, @user.userrecipes, :id, :recipe_name%>
+          </div>
+          </div>
+          </div>
+          <div class="field">
+          <div class="control">
+          <div class="select is-success">
+        <%=f.select :course_type, Recipe.course_type%>
+          </div>
+          </div>
+          </div>
+        <%=f.submit 'Add Course'%>
+      <%end%>
+    <%end%>
+    <br>
+  </div>
+    <div class="column has-text-left">
+    <h4> Drinks: <%= @dinner.drinks.count %></h4>
+    <ul>
+      <%@dinner.drinks.each do |drink|%>
+      <li>
+        <%=drink.user.name%> is bringing <%=drink.quantity.to_s%> <%if drink.quantity > 1 %> bottles <%else%>bottle <%end%> of <%=drink.drink_type%>.
+        <%if test_ownership(drink, @user, @dinner)%>
+          <%=button_to 'Delete your drink!', "/drinks/#{drink.id}", method: :delete, class: "delete_button"%>
+          <br>
+        <%end%>
+      </li>
+      <%end%>
+    </ul>
+    <%if @user.has_drink_course_privalege(@dinner)%>
+      <%=form_for @drink do |f|%>
+        <%=f.hidden_field :dinner_id, :value=>@dinner.id %>
+        <%=f.hidden_field :user_id, :value=>@user.id%>
+        <div class="field">
+        <div class="control">
+        <div class="select is-success">
+        <%=f.select :drink_type, Drink.drink_designations%>
+      </div>
+      </div>
+      </div>
       <div class="field">
       <div class="control">
       <div class="select is-success">
-    <%=f.collection_select :userrecipe_id, @user.userrecipes, :id, :recipe_name%>
+        <%=f.select :quantity, 1..10%>
       </div>
       </div>
       </div>
-      <div class="field">
-      <div class="control">
-      <div class="select is-success">
-    <%=f.select :course_type, Recipe.course_type%>
-      </div>
-      </div>
-      </div>
-    <%=f.submit 'Add Course'%>
-  <%end%>
-<%end%>
-<h3> Drinks: </h3>
-<ul>
-  <%@dinner.drinks.each do |drink|%>
-  <li>
-    <%=drink.user.name%> is bringing <%=drink.quantity.to_s%> <%if drink.quantity > 1 %> bottles <%else%>bottle <%end%> of <%=drink.drink_type%>.
-    <%if test_ownership(drink, @user, @dinner)%>
-      <%=button_to 'Delete your drink!', "/drinks/#{drink.id}", method: :delete, class: "delete_button"%>
+        <%=f.submit 'Add Drink'%>
+      <%end%>
     <%end%>
-  </li>
-  <%end%>
-</ul>
-<%if @user.has_drink_course_privalege(@dinner)%>
-  <%=form_for @drink do |f|%>
-    <%=f.hidden_field :dinner_id, :value=>@dinner.id %>
-    <%=f.hidden_field :user_id, :value=>@user.id%>
-    <div class="field">
-    <div class="control">
-    <div class="select is-success">
-    <%=f.select :drink_type, Drink.drink_designations%>
   </div>
-  </div>
-  </div>
-  <div class="field">
-  <div class="control">
-  <div class="select is-success">
-    <%=f.select :quantity, 1..10%>
-  </div>
-  </div>
-  </div>
-    <%=f.submit 'Add Drink'%>
-  <%end%>
-<%end%>
-
-
+  <div class="column has-text-left">
   <%= render "commentviewer" %>
+</div>
+</div>

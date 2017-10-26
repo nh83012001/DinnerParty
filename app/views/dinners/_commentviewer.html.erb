@@ -1,8 +1,8 @@
-<h3>Comments:</h3>
+<h4>Comments:</h4>
   <ul>
   <%@dinner.comments.each do |comment| %>
     <li><%=comment.content%><br>
-      
+
       <comment>
       -<%=comment.user.name%>
     </comment>
@@ -15,6 +15,7 @@
   <%=form_for @comment do |f|%>
       <%=f.hidden_field :dinner_id, :value=> @dinner.id%>
       <%=f.hidden_field :user_id, :value=> @user.id%>
-      <%=f.text_area :content%>
+      <%=f.text_area(:content, size: "50x5")%>
+      <br>
       <%=f.submit%>
   <%end%>
