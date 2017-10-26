@@ -5,6 +5,7 @@
 
       <comment>
       -<%=comment.user.name%>
+      <br>
     </comment>
       <%if comment.user_id == @user.id%>
         <%=button_to 'Delete comment!', "/comments/#{comment.id}", method: :delete, class: "delete_button"%>
