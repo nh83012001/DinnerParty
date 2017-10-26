@@ -1,6 +1,6 @@
 <h1><%=@user.name%>'s Saved Recipes</h1>
 <br>
-<centershow>
+
     <ol>
     <% @user.recipes.each do |recipe|%>
   <li> <%=link_to recipe.name, recipe_path(recipe)%></li>
