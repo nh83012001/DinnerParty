@@ -89,19 +89,19 @@
   <% end %>
   <br>
 <% end %>
-Attending: <%= @dinner.accepted_invitations.count %>
+<h4>Attending:</h4> <%= @dinner.accepted_invitations.count %>
   <ul>
   <%@dinner.accepted_invitations.each do |invite|%>
     <li><%=invite.user.name%></li>
   <%end%>
   </ul>
-Pending: <%= @dinner.pending_invitations.count %>
+<h4>Pending:</h4><%= @dinner.pending_invitations.count %>
   <ul>
   <%@dinner.pending_invitations.each do |invite|%>
     <li><%=invite.user.name%></li>
   <%end%>
   </ul>
-Declined: <%= @dinner.declined_invitations.count %>
+<h4>Declined:</h4> <%= @dinner.declined_invitations.count %>
   <ul>
     <%@dinner.declined_invitations.each do |invite|%>
       <li><%=invite.user.name%></li>
