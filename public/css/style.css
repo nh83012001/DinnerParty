@@ -1,4 +1,3 @@
-
 h1 {
   font-size: 2.5em;
   background-color: lightblue;
@@ -39,4 +38,13 @@ input[type=button], input[type=submit], input[type=reset] {
     text-decoration: none;
     margin: 2px 1px;
     cursor: pointer;
+}
+
+comment {
+  font-style: italic;
+}
+
+commentbox{
+  background-color: lightgray;
+
 }

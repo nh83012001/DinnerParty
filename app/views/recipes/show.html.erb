@@ -3,9 +3,6 @@
   <head>
   </head>
   <style>
-    h3 {
-
-    }
   </style>
 
   <body>
@@ -19,6 +16,7 @@
       <div class='column'>
         <h4>Ingredients</h4>
         <p><%= @recipe.ingredients %></p>
+        <br>
         <h4>Instructions</h3>
         <p><%= @recipe.instructions %></p>
         <br>
@@ -26,13 +24,14 @@
         <p><%= link_to @recipe.owner.name, user_path(@recipe.owner) %></p>
       </div>
       <div class='column'>
-        <h4>In these users' cookbooks:</h4>
+        <h4>Recipe Forks:</h4>
         <%@recipe.users.each do |user| %>
         <p><%= link_to user.name, user_path(user) %></p>
         <%end%>
       </div>
     </div>
     <!--  May need to fix rout for clarity's sake!!-->
+    <div class="test">
     <%if test_recipe_ownership%>
       <p><%= button_to("Add Recipe to Your Recipes", recipe_path, method: :patch )%>
       <%= button_to("Fork This Recipe to Make It Your Own!", recipe_fork_path(@recipe), method: :get )%></p>
@@ -40,6 +39,6 @@
     <%if get_user_id == @recipe.owner_id%>
       <p><%= button_to("Edit This Recipe", edit_recipe_path, method: :get )%><%= button_to("Delete This Recipe", recipe_path, method: :delete, data: { confirm: "Are you sure you want to delete this recipe?" })%></p>
     <%end%>
-
+</div>
   </body>
 </html>
