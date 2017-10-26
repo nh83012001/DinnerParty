@@ -1,10 +1,11 @@
 <%= stylesheet_link_tag "recipes.scss" %>
 
-<h1> All Recipes </h1>
+<h1> All Recipes </h1><br>
   <%= form_tag(recipes_path, :method => "get", id: "search-form") do %>
   <%= text_field_tag :search, params[:search], placeholder: "Search Recipes" %>
   <%= submit_tag "Search" %>
   <% end %>
+<br>
 <body>
   <%@recipes.each do |recipe| %>
   <p> <%= link_to recipe.name, recipe_path(recipe)%> </p>

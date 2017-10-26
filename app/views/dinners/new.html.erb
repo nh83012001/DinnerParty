@@ -1,3 +1,4 @@
+<div class="field">
 <%= form_for @dinner do |j| %>
 <%= j.hidden_field :host_id, :value=> session[:user_id] %>
 <%= j.label :name %>
@@ -15,3 +16,4 @@
 <br>
 <%=j.submit %>
 <% end %>
+</div>

@@ -1,10 +1,20 @@
 <h1><%= @dinner.name %></h1>
-<p><%= @dinner.date.strftime("%A %B %d, %Y at %l:%M %p")%>
+<h4 class="has-text-centered"><%= @dinner.date.strftime("%A %B %d, %Y at %l:%M %p")%></h4>
+  <div class="columns">
+    <div class="column has-text-centered">
+      <h4>Host</h4>
+      <p><%= @dinner.host.name%></p>
+    </div>
+    <div class="column has-text-centered">
+      <h4>Location</h4>
+      <p><%= @dinner.location%></p>
+    </div>
+    <div class="column has-text-centered">
+      <h4>Attire</h4>
+      <p><%= @dinner.attire%></p>
+    </div>
 
-
-<p>Location: <%= @dinner.location%></p>
-<p>Attire: <%= @dinner.attire%></p>
-<p>Host: <%= @dinner.host.name%></p>
+  </div>
 
 <% if @user.id == @dinner.host_id && @dinner.upcoming?%>
   <%= button_to("Edit Dinner Party", edit_dinner_path(@dinner), method: :get)%>
