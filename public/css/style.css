@@ -1,0 +1,26 @@
+
+h1 {
+  font-size: 2.5em;
+  background-color: lightblue;
+  border-style: solid;
+  text-align: center;
+  border-width: thin;
+  padding-left: 0px !important;
+  padding-right: 0px !important;
+}
+
+h4  {
+  font-size: 1.5em;
+  color: cadetblue;
+  font-weight: bold;
+}
+
+input {
+  font-size: 1.0em;
+}
+
+body {
+  padding-left: 50px;
+  padding-right: 50px;
+  background-color: floralwhite;
+}

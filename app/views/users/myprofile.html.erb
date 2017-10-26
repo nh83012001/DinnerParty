@@ -1,16 +1,16 @@
 <header>
-<div class="text is-size-3 has-text-weight-bold has-text-centered"> Your Profile Page: <%=@user.name%></div>
+<h1> Your Profile Page: <%=@user.name%></h1>
 </header>
 <body>
 <div class="columns">
     <div class="column">
-<div class="text is-size-4 has-text-weight-bold has-text-primary"> <h4> Your recipes </h4></div>
+ <h4> Your recipes </h4>
   <ul>
     <%@user.owned_recipes.each do |recipe|%>
       <li><%=link_to recipe.name, recipe_path(recipe)%></li>
     <%end%>
   </ul>
-  <div class="text is-size-4 has-text-weight-bold has-text-primary"> <h4> Recipes </h4></div>
+  <h4> Recipes </h4>
   <ul>
     <%@user.recipes.each do |recipe|%>
       <li><%=link_to recipe.name, recipe_path(recipe)%></li>
@@ -19,9 +19,8 @@
   <%= button_to("New Recipe", new_user_recipe_path(@user), method: :get) %>
 </div>
   <div class="column">
-<div class="text is-size-4 has-text-weight-bold has-text-primary"> <h4> Dinners </h4></div>
   <% if @created_dinners %>
-    <div class="text is-size-4 has-text-weight-bold has-text-primary"> <h4> My Dinners </h4></div>
+     <h4> My Dinners </h4>
     <ul>
       <%@created_dinners.each do |dinner|%>
         <li>
@@ -71,7 +70,7 @@
     </ul>
   <% end %>
   <% if @invited_dinners  %>
-    <div class="text is-size-4 has-text-weight-bold has-text-primary"> <h4> Pending Invites </h4></div>
+     <h4> Pending Invites </h4>
       <ul>
         <%@invited_dinners.each do |invite| %>
           <li>
@@ -84,8 +83,8 @@
   <% end %>
 
   <% if @accepted_dinners %>
-  <div class="text is-size-4 has-text-weight-bold"> <h4> Accepted Dinners: </h4></div>
-   <div class="text is-size-4 has-text-weight-bold has-text-primary"> <h4> Upcoming Dinners: </h4></div>
+  <h4> Accepted Dinners </h4>
+    <h4> Upcoming Dinners </h4>
    <ul>
      <%@accepted_dinners.each do |accepted| %>
      <% if accepted.dinner.upcoming? && accepted.dinner.host != @user%>
@@ -109,7 +108,7 @@
      <%end%>
    </ul>
 
-    <div class="text is-size-4 has-text-weight-bold has-text-danger"> <h4> Past Dinners: </h4></div>
+     <h4> Past Dinners </h4>
      <ul>
        <%@accepted_dinners.each do |accepted| %>
            <% if accepted.dinner.upcoming? == false && accepted.dinner.host != @user%>
