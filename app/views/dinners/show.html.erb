@@ -1,10 +1,10 @@
-<h1><%= @dinner.name %></h1>
-<p><%= @dinner.date.strftime("%A %B %d, %Y at %l:%M %p")%>
+<h1></h1>
+<p>
 
-
+<h4><%= @dinner.name %> will be hosted by <%= @dinner.host.name%> on <%= @dinner.date.strftime("%A, %B %d, %Y at %l:%M %p")%>  </h4>
 <p>Location: <%= @dinner.location%></p>
-<p>Attire: <%= @dinner.attire%></p>
-<p>Host: <%= @dinner.host.name%></p>
+<p>Attire: <%= @dinner.attire%> </p>
+
 
 <% if @user.id == @dinner.host_id && @dinner.upcoming?%>
   <%= button_to("Edit Dinner Party", edit_dinner_path(@dinner), method: :get)%>

@@ -1,5 +1,9 @@
+<%= stylesheet_link_tag "users.scss" %>
 
 <h1> Your Profile Page: <%=@user.name%></h1>
+
+<div id="div2">
+
 
 <h3> Your Recipes </h3>
 <ul>
@@ -13,6 +17,7 @@
     <li><%=link_to recipe.name, recipe_path(recipe)%></li>
   <%end%>
 </ul>
+
 <h2> Dinners <h2>
   <% if @created_dinners %>
     <h4> My Dinners </h4>
@@ -40,6 +45,9 @@
       <%end%>
     </ul>
   <% end %>
+
+
+
   <% if @invited_dinners  %>
     <h4>Pending Invites:</h4>
       <ul>
@@ -52,6 +60,9 @@
         <%end%>
       </ul>
   <% end %>
+
+</div>
+<div id="div1">
 
   <% if @accepted_dinners %>
    <h4>Accepted Dinners:</h4>
@@ -80,6 +91,8 @@
      <%end%>
    </ul>
 
+
+
     <h5>  Past Dinners:</h5>
      <ul>
        <%@accepted_dinners.each do |accepted| %>
@@ -92,6 +105,9 @@
        <%end%>
  <% end %>
  </ul>
+</div>
+
+
 
 <%= button_to("New Recipe", new_user_recipe_path(@user), method: :get) %>
 <%= button_to("Logout", logout_path, method: :delete)%>

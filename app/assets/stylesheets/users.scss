@@ -1,3 +1,74 @@
 // Place all the styles related to the users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+// html, body { height: 100%; padding: 0; margin: 0; }
+
+// #div1 { background: #DDD; width: 50%; height: 50%; float: left}
+// #div2 { background: #AAA; width: 50%; height: 50%; float: right}
+// #div3 { background: #777; width: 50%; height: 50%; float: left}
+// #div4 { background: #444; width: 50%; height: 50%; float: right}
+// .caret {
+//   border-color: transparent !important;
+// }
+
+
+div {
+    column-count: 2;
+}
+
+//Layout
+body{background: #DDD; font: 88% Arial}
+// .wrapper
+//   +border-radius(10px)
+//   background: rgba(255,255,255,0.3)
+//   padding: ($gridGut / 2) 0 0
+//   margin: 35px auto
+//   overflow: hidden
+//   width: $gridWidth
+//   i, b, em
+//     &:before
+//       display: inline-block
+  h1{
+    text-align: center;
+    border-radius: 10px;
+    background: #000;
+    overflow: hidden;
+    // font-family: $headFont;
+    font-weight: normal;
+    color: #c0fdfd;
+    margin: 0;
+    // padding: ($gridGut / 2)
+    position: relative;
+  }
+    span{
+      border-radius: 10px;
+      background: #000;
+      display: block;
+      float: left;}
+//     i
+//       color: #fd00fd
+//       font-style: normal
+//     b
+//       color: #fff
+//       font-weight: normal
+//     a
+//       +border-radius(10px)
+//       background: #000
+//       color: #c0fdfd
+//       text-decoration: none
+//       display: block
+//       padding: ($gridGut / 2)
+//       float: right
+//       &:hover
+//         background: #444
+    .row{
+      margin: 0;
+      background: #DDD;
+      border-radius: 10px}
+  // [class^=col]
+  //   +border-radius(10px)
+  //   background: #fff
+  //   span
+  //     display: block
+  //     padding: ($gridGut / 2)
+  //     text-align: center
