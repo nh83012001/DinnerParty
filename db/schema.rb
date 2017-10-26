@@ -15,6 +15,14 @@ ActiveRecord::Schema.define(version: 20171025201514) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "alcohols", force: :cascade do |t|
+    t.string   "alcohol_type"
+    t.integer  "dinner_id"
+    t.integer  "user_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
   create_table "comments", force: :cascade do |t|
     t.string   "content"
     t.integer  "user_id"
@@ -29,6 +37,7 @@ ActiveRecord::Schema.define(version: 20171025201514) do
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
     t.string   "course_type"
+    t.string   "alcohol_type"
   end
 
   create_table "dinners", force: :cascade do |t|
