@@ -44,29 +44,25 @@
 
   <% if @accepted_dinners %>
   <h4> Upcoming Dinners </h4>
-   <ul>
      <%@accepted_dinners.each do |accepted| %>
      <% if accepted.dinner.upcoming? && accepted.dinner.host != @user%>
-       <li>
-          <%=link_to accepted.dinner.name, dinner_path(accepted.dinner)%>
 
-       </li>
+          <p><%=link_to accepted.dinner.name, dinner_path(accepted.dinner)%></p>
+
      <%end%>
-   </ul>
+
    <%end%>
 
      <h4> Past Dinners </h4>
-     <ul>
+
        <%@accepted_dinners.each do |accepted| %>
            <% if accepted.dinner.upcoming? == false && accepted.dinner.host != @user%>
-         <li>
              <%=link_to accepted.dinner.name, dinner_path(accepted.dinner)%>
          <% end %>
 
-        </li>
        <%end%>
  <% end %>
- </ul>
+
  <%= button_to('Create a Dinner Plan', new_dinner_path, method: :get)%>
  </div>
  </div>
