@@ -22,7 +22,10 @@ Rails.application.routes.draw do
     put '/reject', to: 'invites#reject', as: 'reject'
   end
 
-  resources :dinners, except: :index
+  resources :dinners, except: :index do
+    put '/uninvite', to: "dinners#uninvite", as: 'uninvite'
+  end
+
 
   resources :courses, only:[:create, :destroy]
 

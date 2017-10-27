@@ -73,6 +73,18 @@
       <%= f.submit "Invite" %>
     <% end %>
     <br>
+    <h6>Uninvite Guests :(</h6>
+    <%= form_tag(dinner_uninvite_path(@dinner), :method => "put") do %>
+    <div class="field">
+    <div class="control">
+    <div class="select is-success">
+      <%= collection_select :invite, :user_id, @invited, :id, :name %>
+    </div>
+    </div>
+    </div>
+      <%= submit_tag "Uninvite" %>
+    <% end %>
+
 
   <% end %>
 

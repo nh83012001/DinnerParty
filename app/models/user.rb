@@ -4,6 +4,7 @@ class User < ApplicationRecord
   has_many :invites
   has_many :dinners, through: :invites
   has_many :userrecipes
+  has_many :courses, through: :userrecipes
   has_many :recipes, through: :userrecipes
   has_many :owned_recipes, class_name:  "Recipe",
                                 foreign_key: "owner_id",
@@ -24,6 +25,10 @@ class User < ApplicationRecord
 
   def self.uninvited(dinner, user)
     User.where("id NOT IN (?)", dinner.invites.pluck(:user_id) << user.id)
+  end
+
+  def self.invited(dinner)
+    User.where("id IN (?)", dinner.invites.pluck(:user_id))
   end
 
   def has_drink_course_privalege(dinner)

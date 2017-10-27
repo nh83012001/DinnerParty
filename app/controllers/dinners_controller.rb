@@ -26,6 +26,7 @@ class DinnersController < ApplicationController
     @invite = Invite.new
 
     @uninvited = User.uninvited(@dinner, @user)
+    @invited = User.invited(@dinner)
 
     @comment = Comment.new
   end
@@ -66,6 +67,14 @@ class DinnersController < ApplicationController
     end
   end
 
+  def uninvite
+    @dinner = Dinner.find(params[:dinner_id])
+    @invite = Invite.find_by(invite_params, dinner_inv_params)
+    @invite.destroy_related_courses
+    @invite.destroy
+    redirect_to dinner_path(@dinner)
+  end
+
   def destroy
     @dinner = Dinner.find(params[:id])
     Invite.destroy_without_dinner(params[:id])
@@ -80,6 +89,14 @@ class DinnersController < ApplicationController
 
   def dinner_params
     params.require(:dinner).permit(:location, :date, :host_id, :name, :attire)
+  end
+
+  def invite_params
+    params.require(:invite).permit(:user_id)
+  end
+
+  def dinner_inv_params
+    params.permit(:dinner_id)
   end
 
 end
